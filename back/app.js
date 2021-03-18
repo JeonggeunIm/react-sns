@@ -6,6 +6,8 @@ const cookieParser = require('cookie-parser');
 const passport = require('passport');
 const dotenv = require('dotenv');
 const morgan = require('morgan');
+const hpp = require('hpp');
+const helmet = require('helmet');
 
 const postRouter = require('./routes/post');
 const postsRouter = require('./routes/posts');
@@ -45,7 +47,7 @@ app.use('/', express.static(path.join(__dirname, 'uploads')));
 // 헤커들의 요청까지 허용하면 안되므로 origin으로 요청 허용할 url 지정
 app.use(cors({
   // origin: true 설정 -> * 대신 요청을 보낸 곳의 주소가 자동으로 들어가 편리
-  origin: true,
+  origin: ['http://localhost:3060', 'snsbyjg.com'],
   // true여야 다른 도메인 간 쿠키 전송 가능 -> res.setHeader("Access-Control-Allow-Credentials", "true");
   credentials: true, // 기본 값 false
 }));
@@ -59,11 +61,18 @@ db.sequelize.sync({
   })
   .catch(console.error);
 
+if (process.env.NODE_ENV === 'production') {
+  app.use(morgan('combined'));
+  app.use(hpp());
+  app.use(helmet());
+} else {
+  app.use(morgan('dev'));
+}
 // app.method('url', cb)
-// // 주소창에 입력해서 요청하는 건 GET 요청
-// app.get('/', (req, res) => {
-//   res.send('Hello Express!'); // http의 end와 동일
-// });
+// 주소창에 입력해서 요청하는 건 GET 요청
+app.get('/', (req, res) => {
+  res.send('Hello Express!'); // http의 end와 동일
+});
 // app.get('/api', (req, res) => {
 //   res.send('Hello API!');
 // });
