@@ -25,7 +25,7 @@ const PostImages = ({ images }) => {
 
   const imgBackgroundStyle = useMemo(() => (
     images.map((image) => ({
-      background: `url(${backURL}/${image.src}) no-repeat center / cover`,
+      background: `url(image.src) no-repeat center / cover`,
     }))
   ), [images]);
 
@@ -39,7 +39,7 @@ const PostImages = ({ images }) => {
             onClick={onZoom}
             key={image.src}
           >
-            <img role="presentation" src={`${backURL}/${image.src}`} alt={`${i + 1}번 째 이미지`} />
+            <img role="presentation" src={image.src} alt={`${i + 1}번 째 이미지`} />
           </div >
         ))
       }

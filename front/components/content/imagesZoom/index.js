@@ -31,7 +31,7 @@ const ImagesZoom = ({ images, onClose, defaultPageNum }) => {
           <Slider {...settings}>
             {images.map((v) => (
               <ImageWrapper key={v.src}>
-                <img src={`${backURL}/${v.src}`} alt={v.src} />
+                <img src={v.src} alt={v.src} />
               </ImageWrapper>
             ))}
           </Slider>

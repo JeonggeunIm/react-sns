@@ -105,7 +105,7 @@ const PostForm = ({ handlePostCancel, popup = false, post, postVisible, main = f
 
   const imgBackgroundStyle = useMemo(() =>
     imagePaths.map((v) => (
-      { background: `url(${backURL}/${v}) no-repeat center / cover` }
+      { background: `url(${v}) no-repeat center / cover` }
     )), [imagePaths]
   );
 
@@ -141,7 +141,7 @@ const PostForm = ({ handlePostCancel, popup = false, post, postVisible, main = f
                   className="imagePreview"
                   style={imgBackgroundStyle[i]}
                 >
-                  <img src={`${backURL}/${v}`} alt={`${i + 1}번 째 이미지`} />
+                  <img src={v} alt={`${i + 1}번 째 이미지`} />
                   {/* 반복문 map 안에 데이터 전달하는 이벤트 리스너 등록할 경우 고차함수 이용 */}
                   <Button type="primary" shape="circle" icon={<CloseOutlined />} onClick={onRemoveImage(i)} />
                 </div>
