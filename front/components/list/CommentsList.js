@@ -4,6 +4,7 @@ import Link from 'next/link';
 import moment from 'moment';
 import { List, Comment, Avatar } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
+import { backURL } from '../../config/config';
 
 moment.locale('ko');
 
@@ -27,7 +28,7 @@ const CommentsList = ({ orderedComments }) => (
               <a><Avatar
                 size={48}
                 {...(item.User.Profile?.profileSrc
-                  ? { src: `http://localhost:3065/profile/${item.User.Profile.profileSrc}` }
+                  ? { src: `${backURL}/profile/${item.User.Profile.profileSrc}` }
                   : { icon: <UserOutlined /> })}
               /></a>
             </Link>

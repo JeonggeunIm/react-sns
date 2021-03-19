@@ -4,6 +4,7 @@ import { PlusOutlined } from '@ant-design/icons';
 
 import { PostImagesWrapper } from './styles';
 import ImagesZoom from './imagesZoom';
+import { backURL } from '../../config/config';
 
 const PostImages = ({ images }) => {
   const [showImageZoom, setShowImageZoom] = useState(false);
@@ -24,7 +25,7 @@ const PostImages = ({ images }) => {
 
   const imgBackgroundStyle = useMemo(() => (
     images.map((image) => ({
-      background: `url(http://localhost:3065/${image.src}) no-repeat center / cover`,
+      background: `url(${backURL}/${image.src}) no-repeat center / cover`,
     }))
   ), [images]);
 
@@ -38,7 +39,7 @@ const PostImages = ({ images }) => {
             onClick={onZoom}
             key={image.src}
           >
-            <img role="presentation" src={`http://localhost:3065/${image.src}`} alt={`${i + 1}번 째 이미지`} />
+            <img role="presentation" src={`${backURL}/${image.src}`} alt={`${i + 1}번 째 이미지`} />
           </div >
         ))
       }

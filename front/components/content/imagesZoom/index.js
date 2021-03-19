@@ -4,6 +4,7 @@ import Slider from 'react-slick';
 import { LeftOutlined, RightOutlined } from '@ant-design/icons';
 
 import { Overlay, Header, SlickWrapper, CloseBtn, ImageWrapper, Indicator, Global } from './styles';
+import { backURL } from '../../../config/config';
 
 const ImagesZoom = ({ images, onClose, defaultPageNum }) => {
   const [currentSlide, setCurrenSlide] = useState(defaultPageNum);
@@ -30,7 +31,7 @@ const ImagesZoom = ({ images, onClose, defaultPageNum }) => {
           <Slider {...settings}>
             {images.map((v) => (
               <ImageWrapper key={v.src}>
-                <img src={`http://localhost:3065/${v.src}`} alt={v.src} />
+                <img src={`${backURL}/${v.src}`} alt={v.src} />
               </ImageWrapper>
             ))}
           </Slider>

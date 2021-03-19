@@ -5,6 +5,7 @@ import { EllipsisOutlined, UserOutlined } from '@ant-design/icons';
 
 import { UserProfileWrapper } from './styles';
 import { LOG_OUT_REQUEST } from '../../reducers/user';
+import { backURL } from '../../config/config';
 
 const PopoverContent = ({ isLoggingOut, onLogOut, myInfo }) => (
   <Button
@@ -22,7 +23,7 @@ const CardContent = ({ myInfo, profileSrc }) => (
       avatar={
         <Avatar
           size={60}
-          {...(profileSrc ? { src: `http://localhost:3065/profile/${profileSrc}` } : { icon: <UserOutlined /> })}
+          {...(profileSrc ? { src: `${backURL}/profile/${profileSrc}` } : { icon: <UserOutlined /> })}
         />
       }
       title={myInfo?.nickname}
@@ -68,7 +69,7 @@ const UserProfile = () => {
                 avatar={(
                   <Avatar
                     size={{ sm: 32, md: 48, lg: 48, xl: 48, xxl: 48 }}
-                    {...(profileSrc ? { src: `http://localhost:3065/profile/${profileSrc}` } : { icon: <UserOutlined /> })}
+                    {...(profileSrc ? { src: `${backURL}/profile/${profileSrc}` } : { icon: <UserOutlined /> })}
                   />
                 )}
                 title={myInfo?.nickname}

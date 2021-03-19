@@ -22,6 +22,7 @@ import {
   UPDATE_IMAGES,
   SHOW_IMAGES_PREVIEW
 } from '../../reducers/post';
+import { backURL } from '../../config/config';
 
 // moment 라이브러리 한국 기준 초기화
 moment.locale('ko');
@@ -225,7 +226,7 @@ const PostCard = ({
                         <Avatar
                           size={40}
                           {...(retweetProfileSrc
-                            ? { src: `http://localhost:3065/profile/${retweetProfileSrc}` }
+                            ? { src: `${backURL}/profile/${retweetProfileSrc}` }
                             : { icon: <UserOutlined /> })}
                         />
                       </a>
@@ -256,7 +257,7 @@ const PostCard = ({
                         <Avatar
                           size={40}
                           {...(profileSrc
-                            ? { src: `http://localhost:3065/profile/${profileSrc}` }
+                            ? { src: `${backURL}/profile/${profileSrc}` }
                             : { icon: <UserOutlined /> })}
                         />
                       </a>

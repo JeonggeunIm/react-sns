@@ -9,6 +9,7 @@ import FollowButton from '../button/FollowButton';
 import ProfileEditButton from '../button/ProfileEditButton';
 import CoverEditButton from '../button/CoverEditButton';
 import { ProfileCardWrapper } from './styles';
+import { backURL } from '../../config/config';
 
 moment.locale('ko');
 
@@ -50,7 +51,7 @@ const ProfileCard = ({ userInfo }) => {
             coverSrc
               ? <img
                 alt={`${userInfo.nickname}님의 커버 이미지`}
-                src={`http://localhost:3065/profile/${coverSrc}`}
+                src={`${backURL}/profile/${coverSrc}`}
               />
               : null
           }
@@ -71,7 +72,7 @@ const ProfileCard = ({ userInfo }) => {
         avatar={(
           <Avatar
             size={150}
-            {...(profileSrc ? { src: `http://localhost:3065/profile/${profileSrc}` } : { icon: <UserOutlined /> })}
+            {...(profileSrc ? { src: `${backURL}/profile/${profileSrc}` } : { icon: <UserOutlined /> })}
           />
         )}
         title={userInfo.nickname}
