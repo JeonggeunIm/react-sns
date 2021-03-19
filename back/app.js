@@ -91,6 +91,6 @@ app.use('/hashtag', hashtagRouter);
 // });
 
 // port 지정
-app.listen(3065, () => {
+app.listen(80, () => {
   console.log('executing server....');
 });
