@@ -47,16 +47,6 @@ app.use(passport.session());
 // 첫 번째 인자는 시작 경로이므로 '/' 시 localhost:3065가 됨
 app.use('/', express.static(path.join(__dirname, 'uploads')));
 
-// res.setHeader('Access-Control-Allow-Origin', '*');와 동일한 처리
-// app.use(cors());
-// 헤커들의 요청까지 허용하면 안되므로 origin으로 요청 허용할 url 지정
-app.use(cors({
-  // origin: true 설정 -> * 대신 요청을 보낸 곳의 주소가 자동으로 들어가 편리
-  origin: ['http://localhost:3060', 'http://snsbyjg.website'],
-  // true여야 다른 도메인 간 쿠키 전송 가능 -> res.setHeader("Access-Control-Allow-Credentials", "true");
-  credentials: true, // 기본 값 false
-}));
-
 // express에서 sequelize 등록
 db.sequelize.sync({
   // alter: true,
@@ -70,8 +60,22 @@ if (process.env.NODE_ENV === 'production') {
   app.use(morgan('combined'));
   app.use(hpp());
   app.use(helmet());
+
+  // res.setHeader('Access-Control-Allow-Origin', '*');와 동일한 처리
+  // app.use(cors());
+  // 헤커들의 요청까지 허용하면 안되므로 origin으로 요청 허용할 url 지정
+  app.use(cors({
+    // origin: true 설정 -> * 대신 요청을 보낸 곳의 주소가 자동으로 들어가 편리
+    origin: ['http://snsbyjg.website'],
+    // true여야 다른 도메인 간 쿠키 전송 가능 -> res.setHeader("Access-Control-Allow-Credentials", "true");
+    credentials: true, // 기본 값 false
+  }));
 } else {
   app.use(morgan('dev'));
+  app.use(cors({
+    origin: true,
+    credentials: true,
+  }));
 }
 // app.method('url', cb)
 // 주소창에 입력해서 요청하는 건 GET 요청
