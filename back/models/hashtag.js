@@ -11,7 +11,7 @@ module.exports = class Hashtag extends Model {
       },
     }, {
       modelName: 'Hashtag',
-      tableName: 'Hashtags',
+      tableName: 'hashtags',
       charset: 'utf8mb4',
       collate: 'utf8mb4_general_ci',
       sequelize, // index.js에서 연결 객체에 사용될 sequelize를 보내줌
