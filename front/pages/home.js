@@ -28,6 +28,7 @@ const Home = () => {
     addCommentDone,
   } = useSelector((state) => state.postReducer);
 
+  console.log(myInfo);
   useEffect(() => {
     if (targetPost && loadPostDone) {
       if (allPostsCount !== 0 || addCommentDone) {
@@ -74,7 +75,7 @@ const Home = () => {
         <title>홈 | SNS</title>
       </Head>
       <AppLayout>
-        <AppHeader title="홈" myInfo={myInfo}/>
+        <AppHeader title="홈" myInfo={myInfo} />
         {myInfo && <PostForm main />}
         {mainPosts.map((post) => (
           <PostCard

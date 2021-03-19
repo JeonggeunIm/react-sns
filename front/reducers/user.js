@@ -242,7 +242,6 @@ const user = (state = initialState, action) => (
         draft.isLoggedIn = true;
         draft.isLoggedOut = false;
         draft.myInfo = action.data;
-        console.log(draft.myInfo);
         break;
       }
       case LOG_IN_FAILURE: {
