@@ -115,7 +115,7 @@ const PostForm = ({ handlePostCancel, popup = false, post, postVisible, main = f
         <Col xs={3} md={3}>
           <Avatar
             size={{ xs: 50, sm: 50, md: 60, lg: 60, xl: 60, xxl: 60 }}
-            {...(profileSrc ? { src: `${backURL}/profile/${profileSrc}` } : { icon: <UserOutlined /> })}
+            {...(profileSrc ? { src: profileSrc } : { icon: <UserOutlined /> })}
           />
         </Col>
         <Col xs={21} md={21}>

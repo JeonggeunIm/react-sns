@@ -4,6 +4,8 @@ const passport = require('passport');
 const { Op } = require('sequelize');
 const fs = require('fs'); // file system 조작 모듈
 const multer = require('multer');
+const multerS3 = require('multer-s3');
+const AWS = require('aws-sdk');
 const path = require('path'); // node에서 기본 제공
 
 const { User, Post, Comment, Image, Profile } = require('../models');
@@ -18,22 +20,41 @@ try {
   fs.mkdirSync('uploads/profile');
 }
 
+AWS.config.update({
+  accessKeyId: process.env.S3_ACCESS_KEY_ID,
+  secretAccessKey: process.env.S3_SECRET_ACCESS_KEY,
+  region: 'ap-northeast-2',
+});
+
 // multer 세팅
 const upload = multer({
-  storage: multer.diskStorage({
-    destination(req, file, cb) {
-      cb(null, 'uploads/profile');
-    },
-    filename(req, file, cb) {
-      const ext = path.extname(file.originalname); // 확장자 추출
-      const basename = path.basename(file.originalname, ext); // 파일명 추출
-      cb(null, basename + '_' + new Date().getTime() + ext); // => 파일명_38023932.확장자
-    },
+  storage: multerS3({
+    s3: new AWS.S3(),
+    bucket: 'react-snsbyjg-s3',
+    key(req, file, cb) {
+      cb(null, `original/${Date.now()}_${path.basename(file.originalname)}`)
+    }
   }),
   limits: {
     fileSize: 20 * 1024 * 1024 // 20Mb
   },
 });
+// multer 세팅
+// const upload = multer({
+//   storage: multer.diskStorage({
+//     destination(req, file, cb) {
+//       cb(null, 'uploads/profile');
+//     },
+//     filename(req, file, cb) {
+//       const ext = path.extname(file.originalname); // 확장자 추출
+//       const basename = path.basename(file.originalname, ext); // 파일명 추출
+//       cb(null, basename + '_' + new Date().getTime() + ext); // => 파일명_38023932.확장자
+//     },
+//   }),
+//   limits: {
+//     fileSize: 20 * 1024 * 1024 // 20Mb
+//   },
+// });
 
 //! [load my info]
 // 새로고침 시 매번 요청

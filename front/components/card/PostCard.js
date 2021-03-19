@@ -20,7 +20,7 @@ import {
   RETWEET_POST_REQUEST,
   LOAD_POST_REQUEST,
   UPDATE_IMAGES,
-  SHOW_IMAGES_PREVIEW
+  SHOW_IMAGES_PREVIEW,
 } from '../../reducers/post';
 import { backURL } from '../../config/config';
 
@@ -112,7 +112,7 @@ const PostCard = ({
       type: REMOVE_POST_REQUEST,
       data: post.id,
     });
-    if (router.pathname === `/post/[id]`) {
+    if (router.pathname === '/post/[id]') {
       router.back();
     }
   }, [id, post, dispatch]);
@@ -188,14 +188,16 @@ const PostCard = ({
                   </>
                 )
                 // 자신의 글이 아닌 경우
-                : <FollowButton
-                  userInfo={
-                    post.RetweetId && post.Retweet
-                      ? post.Retweet.User
-                      : post.User
-                  }
-                  postCard={true}
-                />
+                : (
+                  <FollowButton
+                    userInfo={
+                      post.RetweetId && post.Retweet
+                        ? post.Retweet.User
+                        : post.User
+                    }
+                    postCard
+                  />
+                )
             }
           >
             <EllipsisOutlined onClick={onPreventClick} />
@@ -226,7 +228,7 @@ const PostCard = ({
                         <Avatar
                           size={40}
                           {...(retweetProfileSrc
-                            ? { src: `${backURL}/profile/${retweetProfileSrc}` }
+                            ? { src: retweetProfileSrc }
                             : { icon: <UserOutlined /> })}
                         />
                       </a>
@@ -257,7 +259,7 @@ const PostCard = ({
                         <Avatar
                           size={40}
                           {...(profileSrc
-                            ? { src: `${backURL}/profile/${profileSrc}` }
+                            ? { src: { profileSrc } }
                             : { icon: <UserOutlined /> })}
                         />
                       </a>
@@ -272,8 +274,7 @@ const PostCard = ({
       {
         // 코멘트 부분 -> '/post/[id]' 인입 시 표시
         commentOpened
-        &&
-        <CommentsList orderedComments={orderedComments} />
+        && <CommentsList orderedComments={orderedComments} />
       }
       <Modal
         title="댓글 남기기"
@@ -289,7 +290,7 @@ const PostCard = ({
       >
         <PostForm handlePostCancel={handlePostCancel} popup post={post} />
       </Modal>
-    </PostCardWrapper >
+    </PostCardWrapper>
   );
 };
 

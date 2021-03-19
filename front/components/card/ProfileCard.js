@@ -45,14 +45,16 @@ const ProfileCard = ({ userInfo }) => {
 
   return (
     <ProfileCardWrapper
-      cover={
+      cover={(
         <>
           {
             coverSrc
-              ? <img
-                alt={`${userInfo.nickname}님의 커버 이미지`}
-                src={`${backURL}/profile/${coverSrc}`}
-              />
+              ? (
+                <img
+                  alt={`${userInfo.nickname}님의 커버 이미지`}
+                  src={coverSrc}
+                />
+              )
               : null
           }
           {id
@@ -60,7 +62,7 @@ const ProfileCard = ({ userInfo }) => {
               (id !== userInfo.id) ? null : <CoverEditButton />
             )}
         </>
-      }
+      )}
       extra={
         id
         && (
@@ -72,7 +74,7 @@ const ProfileCard = ({ userInfo }) => {
         avatar={(
           <Avatar
             size={150}
-            {...(profileSrc ? { src: `${backURL}/profile/${profileSrc}` } : { icon: <UserOutlined /> })}
+            {...(profileSrc ? { src: { profileSrc } } : { icon: <UserOutlined /> })}
           />
         )}
         title={userInfo.nickname}

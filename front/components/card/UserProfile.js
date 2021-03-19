@@ -23,7 +23,7 @@ const CardContent = ({ myInfo, profileSrc }) => (
       avatar={
         <Avatar
           size={60}
-          {...(profileSrc ? { src: `${backURL}/profile/${profileSrc}` } : { icon: <UserOutlined /> })}
+          {...(profileSrc ? { src: profileSrc } : { icon: <UserOutlined /> })}
         />
       }
       title={myInfo?.nickname}
@@ -69,7 +69,7 @@ const UserProfile = () => {
                 avatar={(
                   <Avatar
                     size={{ sm: 32, md: 48, lg: 48, xl: 48, xxl: 48 }}
-                    {...(profileSrc ? { src: `${backURL}/profile/${profileSrc}` } : { icon: <UserOutlined /> })}
+                    {...(profileSrc ? { src: profileSrc } : { icon: <UserOutlined /> })}
                   />
                 )}
                 title={myInfo?.nickname}

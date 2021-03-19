@@ -28,7 +28,7 @@ const CommentsList = ({ orderedComments }) => (
               <a><Avatar
                 size={48}
                 {...(item.User.Profile?.profileSrc
-                  ? { src: `${backURL}/profile/${item.User.Profile.profileSrc}` }
+                  ? { src: item.User.Profile.profileSrc }
                   : { icon: <UserOutlined /> })}
               /></a>
             </Link>
