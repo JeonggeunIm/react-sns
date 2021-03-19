@@ -132,6 +132,7 @@ function* logIn(action) {
       type: LOG_IN_SUCCESS,
       data: result.data,
     });
+    console.log(result.data);
   } catch (error) {
     console.error(error);
 
