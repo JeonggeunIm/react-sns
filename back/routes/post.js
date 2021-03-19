@@ -1,6 +1,8 @@
 // import 와 동일
 const express = require('express');
 const multer = require('multer');
+const multerS3 = require('multer-s3');
+const AWS = require('aws-sdk');
 const path = require('path'); // node에서 기본 제공
 const fs = require('fs'); // file system 조작 모듈
 
@@ -18,19 +20,32 @@ try {
   fs.mkdirSync('uploads');
 }
 
+AWS.config.update({
+  accessKeyId: process.env.S3_ACCESS_KEY_ID,
+  secretAccessKey: process.env.S3_SECRET_ACCESS_KEY,
+  region: 'ap-northeast-2',
+});
+
 // multer 세팅
 const upload = multer({
-  storage: multer.diskStorage({
-    destination(req, file, cb) {
-      // 로컬 'uploads'폴더에 저장
-      cb(null, 'uploads');
-    },
-    filename(req, file, cb) {
-      // 이름이 겹치면 노드가 이전 이미지를 덮어씌우므로 주의
-      const ext = path.extname(file.originalname); // 확장자 추출
-      const basename = path.basename(file.originalname, ext); // 파일명 추출
-      cb(null, basename + '_' + new Date().getTime() + ext); // => 파일명_38023932.확장자
-    },
+  // storage: multer.diskStorage({
+  //   destination(req, file, cb) {
+  //     // 로컬 'uploads'폴더에 저장
+  //     cb(null, 'uploads');
+  //   },
+  //   filename(req, file, cb) {
+  //     // 이름이 겹치면 노드가 이전 이미지를 덮어씌우므로 주의
+  //     const ext = path.extname(file.originalname); // 확장자 추출
+  //     const basename = path.basename(file.originalname, ext); // 파일명 추출
+  //     cb(null, basename + '_' + new Date().getTime() + ext); // => 파일명_38023932.확장자
+  //   },
+  // }),
+  storage: multerS3({
+    s3: new AWS.S3(),
+    bucket: 'react-snsbyjg-s3',
+    key(req, file, cb) {
+      cb(null, `original/${Date.now()}_${path.basename(file.originalname)}`)
+    }
   }),
   limits: {
     fileSize: 20 * 1024 * 1024 // 20Mb
@@ -109,7 +124,7 @@ router.post('/', isLoggedIn, upload.none(), async (req, res, next) => {
 router.post('/images', isLoggedIn, upload.array('image'), (req, res, next) => {
   // 이미지 업로드 후에 실행
   console.log(req.files);
-  res.json(req.files.map((v) => v.filename));
+  res.json(req.files.map((v) => v.location));
 });
 
 // [load post]
