@@ -1,1 +1,1 @@
-export const backURL = 'http://13.124.171.64';
+export const backURL = 'http://api.snsbyjg.website';

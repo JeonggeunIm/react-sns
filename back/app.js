@@ -33,6 +33,11 @@ app.use(session({
   resave: false,
   // 쿠키와 시크릿 문자열을 알면 세션이 노출될 수 있으므로 잘 숨겨 놓아야 함
   secret: process.env.COOKIE_SECRET,
+  cookie: {
+    httpOnly: true,
+    secure: false,
+    domain: process.env.NODE_ENV === 'production' && '.snsbyjg.website',
+  }
 }));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -47,7 +52,7 @@ app.use('/', express.static(path.join(__dirname, 'uploads')));
 // 헤커들의 요청까지 허용하면 안되므로 origin으로 요청 허용할 url 지정
 app.use(cors({
   // origin: true 설정 -> * 대신 요청을 보낸 곳의 주소가 자동으로 들어가 편리
-  origin: ['http://localhost:3060', 'snsbyjg.com', 'http://54.180.108.6'],
+  origin: ['http://localhost:3060', 'http://snsbyjg.website'],
   // true여야 다른 도메인 간 쿠키 전송 가능 -> res.setHeader("Access-Control-Allow-Credentials", "true");
   credentials: true, // 기본 값 false
 }));
