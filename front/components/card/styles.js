@@ -119,6 +119,11 @@ export const PostCardWrapper = styled.div`
   .ant-empty-normal {
     display: none;
   }
+  @media screen and (max-width: 767px) {
+    .ant-card {
+      padding: 16px 12px 12px;
+    }
+  }
 `;
 
 export const ProfileCardWrapper = styled(Card)`
@@ -198,6 +203,22 @@ export const ProfileCardWrapper = styled(Card)`
   }
   .ant-avatar-image {
     background-color: #fff;
+  }
+  @media screen and (max-width: 767px) {
+    .ant-card-body {
+      padding: 80px 20px 30px;
+    }
+    .ant-card-meta-avatar {
+      left: 20px;
+    }
+    .ant-card-head {
+      padding: 0 12px;
+    }
+    .ant-card-cover {
+      .ant-btn {
+        right: 12px;
+      }
+    }
   }
 `;
 

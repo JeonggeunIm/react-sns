@@ -160,9 +160,16 @@ export const PostFormWrapper = styled.div`
   }
 
   @media screen and (max-width: 767px) {
+    padding: 22px 12px 30px;
+
     & > .ant-row {
       & > .ant-col:first-child {
         padding-top: 12px;
+      }
+      .ant-form {
+        .ant-row:nth-child(3) {
+          right: calc(18% + 6px);
+        }
       }
     }
   }

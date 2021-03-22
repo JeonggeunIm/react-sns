@@ -195,7 +195,7 @@ export const AppLayoutWrapper = styled.div`
       & > .ant-col:nth-child(2) {
         width: 100%;
         min-width: 100%;
-        margin-top: 50px;
+        margin-top: 60px;
         margin-left: 0;
       }
       .ant-menu {
@@ -212,23 +212,22 @@ export const AppLayoutWrapper = styled.div`
         margin: 0;
         padding: 0;
         box-sizing: border-box;
-        overflow: hidden;
-        font-size: 20px;
+        font-size: 0;
         line-height: 60px;
         text-align: center;
 
         &:first-child {
-          position: absolute;
-          top: 0;
-          left: 0;
+          display: none;
         }
-        &:last-child {
-          margin-top: 0;
+        &:nth-child(2),
+        &:nth-child(3) {
+          width: 50px;
+          margin: 0
         }
         &:nth-child(4) {
-          width: 150px;
+          width: 170px;
           padding-top: 20px;
-          margin-left: 20px;
+          margin: 0 10px;
 
           .ant-input-affix-wrapper {
             transform: translateY(-15px);
@@ -240,7 +239,7 @@ export const AppLayoutWrapper = styled.div`
           .ant-card {
             width: 50px;
             height: 50px;
-            margin: 5px;
+            margin: 5px 4px;
             border-radius: 50%;
           }
           .ant-card .ant-card-body {
@@ -257,11 +256,15 @@ export const AppLayoutWrapper = styled.div`
             font-size: 16px;
           }
         }
-          
+        &:last-child {
+          margin-top: 0;
+        }
+        
         .postBtn {
           width: 42px;
           height: 42px;
           padding: 9px 10px;
+          margin: 10px 5px;
           & > span {
             font-size: 0;
           }
@@ -274,17 +277,6 @@ export const AppLayoutWrapper = styled.div`
       .ant-menu-item-icon {
         font-size: 24px;
         margin: 15px;
-      }
-      .ant-menu-item:first-child {
-        height: 60px;
-        line-height: 60px;
-        text-align: center;
-
-        .anticon-message {
-          margin-left: 10px;
-          color: #1890ff;
-          font-size: 30px;
-        }
       }
       .ant-menu-item-selected {
         background-color: #fff;

@@ -67,7 +67,8 @@ export const PostCardContentWapper = styled.div`
   .text-area {
     margin: -10px 0 10px;
     font-size: ${({ commentOpened }) => (commentOpened ? '25px' : '16px')};
-    white-space: pre;
+    white-space: break-spaces;
+
     a {
       color: rgba(0, 0, 0, 0.85);
     }
