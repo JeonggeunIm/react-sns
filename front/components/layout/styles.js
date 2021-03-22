@@ -196,14 +196,14 @@ export const AppLayoutWrapper = styled.div`
       }
       & > .ant-col:nth-child(2) {
         /* width: 100%; */
-        min-width: 100%;
+        min-width: 100vw;
         margin-top: 60px;
         margin-left: 0;
       }
       .ant-menu {
         position: absolute;
         display: flex;
-        justify-content: flex-end;
+        justify-content: center;
         width: 100%;
         top: 0;
         left: 0;
