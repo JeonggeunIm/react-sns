@@ -85,8 +85,16 @@ const Global = createGlobalStyle`
   }
 
   @media screen and (max-width: 767px) {
+    .ant-popover-placement-bottom {
+      /* top: 50% !important; */
+      width: 90%;
+      left: 50% !important;
+      transform: translateX(-50%);
+      /* transform-origin: 50% 50% !important; */
+    }
     .ant-popover-placement-bottom > .ant-popover-content > .ant-popover-arrow {
-      transform: translateX(calc(-50% + 45px)) rotate(45deg);
+      /* transform: translateX(calc(-50% + 45px)) rotate(45deg); */
+      display: none;
     }
     .ant-popover-placement-topRight > .ant-popover-content > .ant-popover-arrow {
       right: 50%;

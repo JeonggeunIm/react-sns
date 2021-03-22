@@ -185,26 +185,28 @@ export const AppLayoutWrapper = styled.div`
 
     & > .ant-row {
       & > .ant-col:first-child {
-        /* width: 100%; */
+        width: 100%;
         min-width: 100%;
         height: 60px;
         padding: 10px;
         box-sizing: border-box;
         border-right: none;
-        border-bottom: 1px solid #f0f0f0;
         z-index: 9999;
       }
       & > .ant-col:nth-child(2) {
-        /* width: 100%; */
-        min-width: 100vw;
+        width: 100%;
+        min-width: 100%;
         margin-top: 60px;
         margin-left: 0;
+        overflow: hidden;
       }
       .ant-menu {
         position: absolute;
         display: flex;
         justify-content: center;
         width: 100%;
+        height: 60px;
+        border-bottom: 1px solid #f0f0f0;
         top: 0;
         left: 0;
       }
@@ -228,10 +230,11 @@ export const AppLayoutWrapper = styled.div`
         }
         &:nth-child(4) {
           width: 170px;
-          padding-top: 20px;
+          padding-top: 24px;
           margin: 0 10px;
 
           .ant-input-affix-wrapper {
+            height: 42px;
             transform: translateY(-15px);
           }
         }
