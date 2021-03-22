@@ -119,9 +119,16 @@ export const PostCardWrapper = styled.div`
   .ant-empty-normal {
     display: none;
   }
+
   @media screen and (max-width: 767px) {
     .ant-card {
       padding: 16px 12px 12px;
+    }
+    .ant-card:hover {
+      background-color: #fff;
+    }
+    .ant-list-split .ant-list-item {
+      padding: 4px 14px;
     }
   }
 `;

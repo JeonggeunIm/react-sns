@@ -36,6 +36,7 @@ const Global = createGlobalStyle`
       }
     }
   }
+  .ant-popover-placement-bottom,
   .ant-popover-placement-top {
     position: fixed;
     width: 20%;
@@ -73,6 +74,10 @@ const Global = createGlobalStyle`
       text-align: left;
     }
   }
+  .ant-popover-placement-topLeft > .ant-popover-content > .ant-popover-arrow,
+  .ant-popover-placement-topRight > .ant-popover-content > .ant-popover-arrow {
+    display: none !important;
+  }
   .ant-modal-content {
     border-radius: 20px;
   }
@@ -87,11 +92,7 @@ const Global = createGlobalStyle`
   @media screen and (max-width: 767px) {
     .ant-popover-placement-top {
       width: 100%;
-      /* transform: translateX(-10%); */
-    }
-    .ant-popover-placement-top > .ant-popover-content > .ant-popover-arrow {
-      /* transform: translateX(calc(-50% + 45px)) rotate(45deg); */
-      display: none;
+      margin: 0 20px;
     }
     .ant-popover-placement-top .ant-popover-inner-content {
       width: 100%;

@@ -88,6 +88,7 @@ const User = () => {
         <PostCard
           key={post.id}
           post={post}
+          userInfo={userInfo}
           retweetPostDone={retweetPostDone}
           retweetPostError={retweetPostError}
         />

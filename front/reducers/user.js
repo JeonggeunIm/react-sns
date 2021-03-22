@@ -308,8 +308,8 @@ const user = (state = initialState, action) => (
         draft.uploadProfileImageLoading = true;
         draft.uploadProfileImageDone = false;
         draft.uploadProfileImageError = null;
-        draft.userInfo.Profile.profileSrc = '';
-        draft.myInfo.Profile.profileSrc = '';
+        // draft.userInfo.Profile = {};
+        // draft.myInfo.Profile = {};
         break;
       }
       case UPLOAD_PROFILE_IMAGE_SUCCESS: {
@@ -329,8 +329,8 @@ const user = (state = initialState, action) => (
         draft.uploadCoverImageLoading = true;
         draft.uploadCoverImageDone = false;
         draft.uploadCoverImageError = null;
-        draft.userInfo.Profile.coverSrc = '';
-        draft.myInfo.Profile.coverSrc = '';
+        // draft.userInfo.Profile = {};
+        // draft.myInfo.Profile = {};
         break;
       }
       case UPLOAD_COVER_IMAGE_SUCCESS: {

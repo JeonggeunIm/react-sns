@@ -29,6 +29,7 @@ moment.locale('ko');
 
 const PostCard = ({
   post,
+  userInfo = null,
   commentOpened = false,
   addCommentDone = false,
 }) => {
@@ -40,7 +41,7 @@ const PostCard = ({
   const orderedComments = [...post.Comments].reverse();
   const liked = post.Likers.find((v) => v.id === id);
   const retweeted = post.RetweetId && post.Retweet && (post.UserId === id);
-  const profileSrc = post.User.Profile?.profileSrc;
+  const profileSrc = userInfo ? userInfo.Profile?.profileSrc : post.User.Profile?.profileSrc;
   const retweetProfileSrc = post.Retweet?.User.Profile?.profileSrc;
   const [visible, setVisible] = useState(false);
   const [postVisible, setPostVisible] = useState(false);
@@ -174,6 +175,7 @@ const PostCard = ({
             aria-label="더 보기"
             key="more"
             placement="topLeft"
+            trigger="click"
             content={
               ((id && id === post.User.id) && !(post.RetweetId && post.Retweet))
                 // 리포스트 아닌 자신의 글인 경우
@@ -306,6 +308,7 @@ PostCard.proptypes = {
     RetweetId: PropTypes.number,
     Retweet: PropTypes.objectOf(PropTypes.any),
   }).isrequired,
+  userInfo: PropTypes.object,
   commentOpened: PropTypes.bool,
   addCommentDone: PropTypes.bool,
 };

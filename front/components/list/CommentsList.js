@@ -25,12 +25,14 @@ const CommentsList = ({ orderedComments }) => (
           content={item.content}
           avatar={(
             <Link href={`/user/${item.User.id}`}>
-              <a><Avatar
-                size={48}
-                {...(item.User.Profile?.profileSrc
-                  ? { src: item.User.Profile.profileSrc }
-                  : { icon: <UserOutlined /> })}
-              /></a>
+              <a>
+                <Avatar
+                  size={48}
+                  {...(item.User.Profile?.profileSrc
+                    ? { src: item.User.Profile.profileSrc }
+                    : { icon: <UserOutlined /> })}
+                />
+              </a>
             </Link>
           )}
         />

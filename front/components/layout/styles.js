@@ -197,7 +197,7 @@ export const AppLayoutWrapper = styled.div`
       & > .ant-col:nth-child(2) {
         width: 100%;
         min-width: 100%;
-        /* margin-top: 60px; */
+        padding-bottom: 60px;
         margin-left: 0;
         overflow: hidden;
       }
@@ -270,7 +270,8 @@ export const AppLayoutWrapper = styled.div`
           width: 42px;
           height: 42px;
           padding: 9px 10px;
-          margin: 10px 5px;
+          margin: 9px 5px;
+
           & > span {
             font-size: 0;
           }
