@@ -20,12 +20,12 @@ const PopoverContent = ({ isLoggingOut, onLogOut, myInfo }) => (
 const CardContent = ({ myInfo, profileSrc }) => (
   <Card>
     <Card.Meta
-      avatar={
+      avatar={(
         <Avatar
           size={60}
           {...(profileSrc ? { src: profileSrc } : { icon: <UserOutlined /> })}
         />
-      }
+      )}
       title={myInfo?.nickname}
       description={`@${myInfo?.email.split('@')[0]}`}
     />

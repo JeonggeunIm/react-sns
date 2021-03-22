@@ -168,6 +168,9 @@ export const AppLayoutWrapper = styled.div`
         .ant-card-meta-avatar {
           padding-right: 10px;
         }
+        .anticon-user {
+          font-size: 24px;
+        }
         .anticon-ellipsis {
           position: absolute;
           top: 24px;
@@ -181,7 +184,7 @@ export const AppLayoutWrapper = styled.div`
     & > .ant-row {
       & > .ant-col:first-child {
         width: 100%;
-        min-width: 530px;
+        min-width: 100%;
         height: 60px;
         padding: 10px;
         box-sizing: border-box;
@@ -191,6 +194,7 @@ export const AppLayoutWrapper = styled.div`
       }
       & > .ant-col:nth-child(2) {
         width: 100%;
+        min-width: 100%;
         margin-top: 50px;
         margin-left: 0;
       }
@@ -246,8 +250,11 @@ export const AppLayoutWrapper = styled.div`
             display: none;
           }
           .ant-card .ant-card-meta-avatar {
-            padding: 0 9px;
+            padding: 0 8px;
             line-height: 54px;
+          }
+          .anticon-user {
+            font-size: 16px;
           }
         }
           

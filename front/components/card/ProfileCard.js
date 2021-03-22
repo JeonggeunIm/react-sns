@@ -14,9 +14,10 @@ import { backURL } from '../../config/config';
 moment.locale('ko');
 
 const ProfileCard = ({ userInfo }) => {
+  console.log(userInfo);
   const dispatch = useDispatch();
   const id = useSelector((state) => state.user.myInfo?.id);
-  const profileSrc = useSelector((state) => state.user.userInfo.Profile?.profileSrc);
+  const profileSrc = useSelector((state) => state.user.userInfo?.Profile?.profileSrc);
   const coverSrc = useSelector((state) => state.user.userInfo.Profile?.coverSrc);
   const { myInfo, followDone, unfollowDone, followLoading, unfollowLoading } = useSelector((state) => state.user);
   const [followingNum, setFollowingNum] = useState(userInfo.Followings);
@@ -74,7 +75,7 @@ const ProfileCard = ({ userInfo }) => {
         avatar={(
           <Avatar
             size={150}
-            {...(profileSrc ? { src: { profileSrc } } : { icon: <UserOutlined /> })}
+            {...(profileSrc ? { src: profileSrc } : { icon: <UserOutlined /> })}
           />
         )}
         title={userInfo.nickname}

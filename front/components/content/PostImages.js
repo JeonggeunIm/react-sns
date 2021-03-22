@@ -25,7 +25,7 @@ const PostImages = ({ images }) => {
 
   const imgBackgroundStyle = useMemo(() => (
     images.map((image) => ({
-      background: `url(image.src) no-repeat center / cover`,
+      background: `url(${image.src}) no-repeat center / cover`,
     }))
   ), [images]);
 

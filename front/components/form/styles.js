@@ -113,6 +113,7 @@ export const PostFormWrapper = styled.div`
   & > .ant-row {
     & > .ant-col:first-child {
       text-align: center;
+      padding-top: 8px;
     }
     & > .ant-col:last-child {
       float: right;
@@ -139,11 +140,12 @@ export const PostFormWrapper = styled.div`
   }
   .ant-input {
     min-height: 60px;
-    padding: 20px 10px;
+    padding: 20px 15px;
     border: none;
     border-bottom: 1px solid #eee;
-    box-shadow: none;
     font-size: 20px;
+    background-color: transparent;
+    box-shadow: none;
   }
   .anticon-file-image {
     transform: translateY(15px);

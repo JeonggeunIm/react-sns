@@ -38,6 +38,7 @@ export const AppHeaderWrapper = styled.div`
 
   @media screen and (max-width: 767px) {
     width: 100%;
+    min-width: 100%;
     top: 60px;
   }
 `;

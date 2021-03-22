@@ -39,7 +39,6 @@ const PostForm = ({ handlePostCancel, popup = false, post, postVisible, main = f
 
     imagePaths.forEach((path) => formData.append('image', path)); // -> req.body.image
     formData.append('content', text); // -> req.body.content
-    formData.append('PostId', post.id); // -> req.body.PostId
 
     dispatch({
       type: ADD_POST_REQUEST,
@@ -112,13 +111,13 @@ const PostForm = ({ handlePostCancel, popup = false, post, postVisible, main = f
   return (
     <PostFormWrapper popup={popup} >
       <Row>
-        <Col xs={3} md={3}>
+        <Col xs={4} md={3}>
           <Avatar
             size={{ xs: 50, sm: 50, md: 60, lg: 60, xl: 60, xxl: 60 }}
             {...(profileSrc ? { src: profileSrc } : { icon: <UserOutlined /> })}
           />
         </Col>
-        <Col xs={21} md={21}>
+        <Col xs={20} md={21}>
           <Form form={form} layout="inline" encType="multipart/form-data" onFinish={post ? onEditPost : onSubmit}>
             <Form.Item>
               <Input.TextArea

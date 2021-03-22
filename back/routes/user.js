@@ -39,22 +39,6 @@ const upload = multer({
     fileSize: 20 * 1024 * 1024 // 20Mb
   },
 });
-// multer 세팅
-// const upload = multer({
-//   storage: multer.diskStorage({
-//     destination(req, file, cb) {
-//       cb(null, 'uploads/profile');
-//     },
-//     filename(req, file, cb) {
-//       const ext = path.extname(file.originalname); // 확장자 추출
-//       const basename = path.basename(file.originalname, ext); // 파일명 추출
-//       cb(null, basename + '_' + new Date().getTime() + ext); // => 파일명_38023932.확장자
-//     },
-//   }),
-//   limits: {
-//     fileSize: 20 * 1024 * 1024 // 20Mb
-//   },
-// });
 
 //! [load my info]
 // 새로고침 시 매번 요청
@@ -251,19 +235,20 @@ router.get('/followers', isLoggedIn, async (req, res, next) => {
 router.post('/profile', isLoggedIn, upload.single('image'), async (req, res, next) => {
   try {
     console.log('#####이미지' + req.file.filename, req.user.id);
+    const url = 'https://react-snsbyjg-s3.s3.ap-northeast-2.amazonaws.com/original/';
     const result = await Profile.findOrCreate({
       where: {
         UserId: req.user.id,
       },
       defaults: {
-        profileSrc: req.file.filename,
+        profileSrc: req.file.location,
         UserId: req.user.id,
       }
     });
     console.log('#####생성 여부' + result[1]);
     if (!result[1]) {
       await Profile.update({
-        profileSrc: req.file.filename,
+        profileSrc: req.file.location,
       }, {
         where: {
           UserId: req.user.id,
@@ -285,19 +270,20 @@ router.post('/profile', isLoggedIn, upload.single('image'), async (req, res, nex
 router.post('/cover', isLoggedIn, upload.single('image'), async (req, res, next) => {
   try {
     console.log('#####이미지' + req.file.filename, req.user.id);
+    const url = 'https://react-snsbyjg-s3.s3.ap-northeast-2.amazonaws.com/original/';
     const result = await Profile.findOrCreate({
       where: {
         UserId: req.user.id,
       },
       defaults: {
-        coverSrc: req.file.filename,
+        coverSrc: req.file.location,
         UserId: req.user.id,
       }
     });
     console.log('#####생성 여부' + result[1]);
     if (!result[1]) {
       await Profile.update({
-        coverSrc: req.file.filename,
+        coverSrc: req.file.location,
       }, {
         where: {
           UserId: req.user.id,

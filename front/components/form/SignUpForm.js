@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect } from 'react';
-import PropTypes from 'prop-types';
+import PropTypes, { checkPropTypes } from 'prop-types';
 import { useDispatch } from 'react-redux';
 import Head from 'next/head';
 import Link from 'next/link';
@@ -9,12 +9,38 @@ import { SignUpFormWrapper } from './styles';
 import FormHeader from '../header/FormHeader';
 import useInput from '../../hooks/useInput';
 import { SIGN_UP_REQUEST } from '../../reducers/user';
-import useActiveFocus from '../../hooks/useActiveFocus';
-import { checkPropTypes } from 'prop-types';
 
 const SignUpForm = ({ isSigningUp }) => {
   useEffect(() => {
-    useActiveFocus();
+    const body = document.querySelector('body');
+
+    function onActiveFocus(e) {
+      const setActiveEffect = () => {
+        const activeInputs = document.querySelectorAll('[data-active="active"]');
+        activeInputs.forEach((activeInput) => {
+          if (activeInput.querySelector('input').value === '') {
+            activeInput.dataset.active = '';
+          }
+        });
+      };
+
+      if (e.target.classList.contains('ant-input')) {
+        if (e.type === 'focus') {
+          setActiveEffect();
+          e.target.closest('.ant-form-item').dataset.active = 'active';
+        }
+      } else {
+        setActiveEffect();
+      }
+    }
+
+    body.addEventListener('focus', onActiveFocus, { capture: true });
+    body.addEventListener('click', onActiveFocus);
+
+    return () => {
+      body.removeEventListener('focus', onActiveFocus, { capture: true });
+      body.removeEventListener('click', onActiveFocus);
+    };
   }, []);
 
   const dispatch = useDispatch();

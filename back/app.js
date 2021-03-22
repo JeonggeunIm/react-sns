@@ -18,10 +18,10 @@ const passportConfig = require('./passport');
 
 // 한번 호출해줘야 함
 const app = express();
+const port = process.env.NODE_ENV === 'production' ? 80 : 3065;
 passportConfig();
 // process.env. 으로 접근하기 위해 호출
 dotenv.config();
-
 // use()는 express 서버에 미들웨어 장착
 // 프론트에서 보낸 data를 해석해서 req.body에 담아주는 역할 => 라우트 설정 전에 선언해야 됨
 app.use(express.json()); // json 데이터 처리
@@ -100,6 +100,6 @@ app.use('/hashtag', hashtagRouter);
 // });
 
 // port 지정
-app.listen(80, () => {
+app.listen(port, () => {
   console.log('executing server....');
 });

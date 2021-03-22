@@ -259,7 +259,7 @@ const PostCard = ({
                         <Avatar
                           size={40}
                           {...(profileSrc
-                            ? { src: { profileSrc } }
+                            ? { src: profileSrc }
                             : { icon: <UserOutlined /> })}
                         />
                       </a>
