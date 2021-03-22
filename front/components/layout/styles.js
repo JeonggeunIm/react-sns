@@ -181,9 +181,11 @@ export const AppLayoutWrapper = styled.div`
   }
 
   @media screen and (max-width: 767px) {
+    width: 100%;
+
     & > .ant-row {
       & > .ant-col:first-child {
-        width: 100%;
+        /* width: 100%; */
         min-width: 100%;
         height: 60px;
         padding: 10px;
@@ -193,7 +195,7 @@ export const AppLayoutWrapper = styled.div`
         z-index: 9999;
       }
       & > .ant-col:nth-child(2) {
-        width: 100%;
+        /* width: 100%; */
         min-width: 100%;
         margin-top: 60px;
         margin-left: 0;
