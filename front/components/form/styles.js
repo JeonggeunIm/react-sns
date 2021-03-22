@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const CommentFormWrapper = styled.div`
-  padding: 20px 20px 40px;
+  padding: 20px 20px 50px;
   background-color: #fff;
 
   .ant-form {
@@ -10,13 +10,13 @@ export const CommentFormWrapper = styled.div`
   .ant-btn.ant-btn-primary {
     position: absolute;
     height: 40px;
-    bottom: 0;
+    bottom: -50px;
     right:0;
     z-index: 1;
   }
   .ant-input {
     height: 60px;
-    width: 70%;
+    width: 100%;
     font-size: 20px;
     border: none;
     border-bottom: 1px solid #eee;

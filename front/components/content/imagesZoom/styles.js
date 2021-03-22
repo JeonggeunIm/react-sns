@@ -3,15 +3,18 @@ import { CloseCircleFilled } from '@ant-design/icons';
 
 export const Overlay = styled.div`
   position: fixed;
-  inset: 0;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
   z-index: 9999;
+  background-color: rgba(0,0,0,.8);
 `;
 
 export const Header = styled.header`
   height: 100px;
   position: relative;
   padding: 0;
-  background-color: rgba(0,0,0,.8);
 `;
 
 export const CloseBtn = styled(CloseCircleFilled)`
@@ -26,7 +29,7 @@ export const CloseBtn = styled(CloseCircleFilled)`
 
 export const SlickWrapper = styled.div`
   height: calc(100% - 100px);
-  background-color: rgba(0,0,0,.8);
+  /* background-color: rgba(0,0,0,.8); */
 `;
 
 export const ImageWrapper = styled.div`
