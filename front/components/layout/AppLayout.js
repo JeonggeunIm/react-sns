@@ -108,6 +108,7 @@ const AppLayout = ({ children }) => {
         title="포스트하기"
         visible={postVisible}
         onCancel={handlePostCancel}
+        centered
       >
         <PostForm handlePostCancel={handlePostCancel} popup />
       </Modal>

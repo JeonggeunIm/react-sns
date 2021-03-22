@@ -191,12 +191,13 @@ export const AppLayoutWrapper = styled.div`
         padding: 10px;
         box-sizing: border-box;
         border-right: none;
+        bottom: 0;
         z-index: 9999;
       }
       & > .ant-col:nth-child(2) {
         width: 100%;
         min-width: 100%;
-        margin-top: 60px;
+        /* margin-top: 60px; */
         margin-left: 0;
         overflow: hidden;
       }
@@ -206,7 +207,7 @@ export const AppLayoutWrapper = styled.div`
         justify-content: center;
         width: 100%;
         height: 60px;
-        border-bottom: 1px solid #f0f0f0;
+        border-top: 1px solid #f0f0f0;
         top: 0;
         left: 0;
       }
@@ -242,9 +243,9 @@ export const AppLayoutWrapper = styled.div`
           background-color: transparent;
 
           .ant-card {
-            width: 50px;
-            height: 50px;
-            margin: 5px 4px;
+            width: 42px;
+            height: 42px;
+            margin: 9px 8px;
             border-radius: 50%;
           }
           .ant-card .ant-card-body {
@@ -254,8 +255,8 @@ export const AppLayoutWrapper = styled.div`
             display: none;
           }
           .ant-card .ant-card-meta-avatar {
-            padding: 0 8px;
-            line-height: 54px;
+            padding: 0 4px;
+            line-height: 45px;
           }
           .anticon-user {
             font-size: 16px;
@@ -281,7 +282,7 @@ export const AppLayoutWrapper = styled.div`
       }
       .ant-menu-item-icon {
         font-size: 24px;
-        margin: 15px;
+        margin: 18px 15px;
       }
       .ant-menu-item-selected {
         background-color: #fff;

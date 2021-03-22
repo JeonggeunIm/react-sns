@@ -67,6 +67,7 @@ export const Global = createGlobalStyle`
   .slick-prev, .slick-next {
     position: absolute;
     top: 50%;
+    transform: translateY(-50%);
     transition: translateY(-50%);
     z-index: 9999;
     font-size: 40px;

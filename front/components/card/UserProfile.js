@@ -62,7 +62,7 @@ const UserProfile = () => {
             trigger="click"
             visible={visible}
             onVisibleChange={handleVisibleChange}
-            placement="bottom"
+            placement="top"
           >
             <Card>
               <Card.Meta
@@ -79,8 +79,7 @@ const UserProfile = () => {
             </Card>
           </Popover>
         </>
-      )
-      }
+      )}
     </UserProfileWrapper>
   );
 };
