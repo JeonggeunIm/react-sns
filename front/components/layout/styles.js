@@ -209,6 +209,7 @@ export const AppLayoutWrapper = styled.div`
       & > .ant-col:nth-child(2) {
         width: 100%;
         min-width: 100%;
+        min-height: 0;
         margin-left: 0;
         padding-bottom: 60px;
         box-sizing: border-box;

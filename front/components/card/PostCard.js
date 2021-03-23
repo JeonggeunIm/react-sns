@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { Card, Button, Popover, Avatar, Modal, List, Comment } from 'antd';
+import { Card, Button, Popover, Avatar, Modal } from 'antd';
 import { RetweetOutlined, HeartOutlined, MessageOutlined, EllipsisOutlined, HeartFilled, UserOutlined } from '@ant-design/icons';
 import moment from 'moment';
 
@@ -22,7 +22,6 @@ import {
   UPDATE_IMAGES,
   SHOW_IMAGES_PREVIEW,
 } from '../../reducers/post';
-import { backURL } from '../../config/config';
 
 // moment 라이브러리 한국 기준 초기화
 moment.locale('ko');

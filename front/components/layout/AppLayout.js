@@ -2,7 +2,7 @@ import React, { useCallback, useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { PropTypes } from 'prop-types';
 import Link from 'next/link';
-import Router, { useRouter } from 'next/router';
+import { useRouter } from 'next/router';
 import { Menu, Input, Row, Col, Button, Modal } from 'antd';
 import { HomeOutlined, UserOutlined, MessageOutlined, SearchOutlined, SendOutlined } from '@ant-design/icons';
 
@@ -39,7 +39,7 @@ const AppLayout = ({ children }) => {
       return alert('검색할 태그명을 입력해주세요.');
     }
 
-    router.push(`/hashtag/${searchInput}`).then((() => window.scrollTo(0, 0)));;
+    router.push(`/hashtag/${searchInput}`).then((() => window.scrollTo(0, 0)));
   }, [searchInput]);
 
   const showPostModal = useCallback((e) => {

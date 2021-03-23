@@ -4,7 +4,6 @@ import { PlusOutlined } from '@ant-design/icons';
 
 import { PostImagesWrapper } from './styles';
 import ImagesZoom from './imagesZoom';
-import { backURL } from '../../config/config';
 
 const PostImages = ({ images }) => {
   const [showImageZoom, setShowImageZoom] = useState(false);

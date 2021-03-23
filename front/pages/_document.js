@@ -1,4 +1,3 @@
-// _app.js 보다 상위 컴포넌트 -> 클래스로 작성
 import React from 'react';
 import Document, { Html, Main, Head, NextScript } from 'next/document';
 import { ServerStyleSheet } from 'styled-components';

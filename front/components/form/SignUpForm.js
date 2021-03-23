@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect } from 'react';
-import PropTypes, { checkPropTypes } from 'prop-types';
+import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import Head from 'next/head';
 import Link from 'next/link';

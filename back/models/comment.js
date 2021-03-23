@@ -23,23 +23,3 @@ module.exports = class Comment extends Model {
     db.Comment.belongsTo(db.Post);
   }
 };
-
-// module.exports = (sequelize, DataTypes) => {
-//   const Comment = sequelize.define('Comment', {
-//     content: {
-//       type: DataTypes.TEXT,
-//       allowNull: false,
-//     },
-//   }, {
-//     // mb4는 이모티콘도 사용 가능
-//     charset: 'utf8mb4',
-//     collate: 'utf8mb4_general_ci'
-//   });
-//   Comment.associate = (db) => {
-//     // belongsTo => UserId(User model의 id), PostId(Post model의 id) 컬럼 생성 -> 아마도 외래키 설정?
-//     db.Comment.belongsTo(db.User);
-//     db.Comment.belongsTo(db.Post);
-//   };
-
-//   return Comment;
-// };

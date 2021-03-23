@@ -21,7 +21,7 @@ const Login = () => {
 
   useEffect(() => {
     if (myInfo) {
-      router.push('/home');
+      router.push('/home').then((() => window.scrollTo(0, 0)));
     }
   }, [myInfo]);
 

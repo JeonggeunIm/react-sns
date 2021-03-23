@@ -3,26 +3,23 @@ import PropTypes from 'prop-types';
 import { Card, Avatar } from 'antd';
 import moment from 'moment';
 import { CalendarOutlined, UserOutlined } from '@ant-design/icons';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import FollowButton from '../button/FollowButton';
 import ProfileEditButton from '../button/ProfileEditButton';
 import CoverEditButton from '../button/CoverEditButton';
 import { ProfileCardWrapper } from './styles';
-import { backURL } from '../../config/config';
 
 moment.locale('ko');
 
 const ProfileCard = ({ userInfo }) => {
   console.log(userInfo);
-  const dispatch = useDispatch();
   const id = useSelector((state) => state.user.myInfo?.id);
   const profileSrc = useSelector((state) => state.user.userInfo?.Profile?.profileSrc);
   const coverSrc = useSelector((state) => state.user.userInfo.Profile?.coverSrc);
-  const { myInfo, followDone, unfollowDone, followLoading, unfollowLoading } = useSelector((state) => state.user);
+  const { followDone, unfollowDone } = useSelector((state) => state.user);
   const [followingNum, setFollowingNum] = useState(userInfo.Followings);
   const [followerNum, setFollowerNum] = useState(userInfo.Followers);
-  const isFollowing = myInfo?.Followings.find((v) => v.id === userInfo.id);
 
   useEffect(() => {
     if (followDone) {

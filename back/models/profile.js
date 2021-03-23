@@ -3,7 +3,6 @@ const { Model } = DataTypes;
 
 module.exports = class Profile extends Model {
   static init(sequelize) {
-    // Model의 init을 호출해줘야 테이블 생성 가능 
     return super.init({
       introduction: {
         type: DataTypes.STRING(100),
@@ -22,7 +21,7 @@ module.exports = class Profile extends Model {
       tableName: 'profiles',
       charset: 'utf8',
       collate: 'utf8_general_ci',
-      sequelize, // index.js에서 연결 객체에 사용될 sequelize를 보내줌
+      sequelize,
     });
   }
 

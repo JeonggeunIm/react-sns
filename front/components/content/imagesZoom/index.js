@@ -4,7 +4,6 @@ import Slider from 'react-slick';
 import { LeftOutlined, RightOutlined } from '@ant-design/icons';
 
 import { Overlay, Header, SlickWrapper, CloseBtn, ImageWrapper, Indicator, Global } from './styles';
-import { backURL } from '../../../config/config';
 
 const ImagesZoom = ({ images, onClose, defaultPageNum }) => {
   const [currentSlide, setCurrenSlide] = useState(defaultPageNum);

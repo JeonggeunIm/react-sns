@@ -4,7 +4,6 @@ import Link from 'next/link';
 import moment from 'moment';
 import { List, Comment, Avatar } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
-import { backURL } from '../../config/config';
 
 moment.locale('ko');
 

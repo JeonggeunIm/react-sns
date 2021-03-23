@@ -5,7 +5,6 @@ import { EllipsisOutlined, UserOutlined } from '@ant-design/icons';
 
 import { UserProfileWrapper } from './styles';
 import { LOG_OUT_REQUEST } from '../../reducers/user';
-import { backURL } from '../../config/config';
 
 const PopoverContent = ({ isLoggingOut, onLogOut, myInfo }) => (
   <Button

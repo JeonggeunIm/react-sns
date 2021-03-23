@@ -40,10 +40,10 @@ const upload = multer({
   },
 });
 
-//! [load my info]
-// 새로고침 시 매번 요청
+// [load my info]
 router.get('/', async (req, res, next) => {
-  console.log(req.headers);
+  // console.log(req.headers);
+
   try {
     if (req.user) {
       const userWithoutPassword = await User.findOne({
@@ -55,7 +55,6 @@ router.get('/', async (req, res, next) => {
         },
         include: [{
           model: Post,
-          // 카운트에 필요한 정보이므로 굳이 다른 내용까지 메모리 낭비해가며 가져올 필요 없음 -> 데이터 효율
           attributes: ['id'],
         }, {
           model: User,
@@ -81,47 +80,35 @@ router.get('/', async (req, res, next) => {
   }
 });
 
-// POST /user
-// app.js의 prefix 와 합쳐져서 POST, /user 로 라우팅
+// [register user]
 router.post('/', isNotLoggedIn, async (req, res, next) => {
   try {
-    // 비밀번호 암호화, 두 번째 숫자는 암호화된 자릿 수로 10 ~ 13 정도를 사용하지만 성능에 따라 다르게 설정 (높을수록 보안엔 좋으나 처리속도가 오래 걸릴 수 있음)
-    // bcrypt도 비동기이므로 await 붙일 것 -> 비동기인지 아닌지는 공식문서 확인
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
 
-    // model에서 조건에 맞는 데이터 찾고, 없으면 null 반환 
     const exUser = await User.findOne({
       where: {
         email: req.body.email,
       }
     });
+
     if (exUser) {
-      // return을 하지 않을 시 res.send('ok'); 도 실행되므로 응답을 두 번 보내게 되므로 일대일 관계 무너짐
-      // send 두 번 이상 보낼 시 can't set headers already sent 에러
       return res.status(403).send('이미 사용중인 아이디입니다.');
     }
-    // .create() : 테이블에 데이터 삽입 (비동기 함수)
-    // res.json이 먼저 실행되는 것을 방지하기 위해 await 사용 
+
     await User.create({
       email: req.body.email,
       nickname: req.body.nickname,
       password: hashedPassword,
     });
-    // // 3000port로 온 요청은 허용하겠다. (차단은 브라우저가, 허용은 서버가 함)
-    // res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
-    // // 모든 요청 허용
-    // res.setHeader('Access-Control-Allow-Origin', '*');
-    // 201 : 데이터가 잘 생성되어 요청 성공
+
     res.status(201).send('ok');
   } catch (error) {
     console.error(error);
-    // 설명 필요
-    next(error); // status(500)
+    next(error);
   }
 });
 
-// POST /user/login
-// 두 번째 콜백 파라미터는 done에서 받아옴
+// [login]
 router.post('/login', isNotLoggedIn, (req, res, next) => {
   // 라우터 내부에서 if(req.isAuthenticate()) 사용할 수 도 있지만 다른 라우터에서 중복이 많이 될 수 있으므로 미들웨어로 따로 생성
   passport.authenticate('local', (err, user, info) => {
@@ -170,6 +157,7 @@ router.post('/login', isNotLoggedIn, (req, res, next) => {
   })(req, res, next);
 });
 
+// [logout]
 router.post('/logout', isLoggedIn, (req, res) => {
   req.logout();
   req.session.destroy();
@@ -179,12 +167,12 @@ router.post('/logout', isLoggedIn, (req, res) => {
 // [change nickname]
 router.patch('/nickname', isLoggedIn, async (req, res, next) => {
   try {
-    // 첫 번째 : 바꿀 필드, 두 번째 : 조건
     await User.update({
       nickname: req.body.nickname,
     }, {
       where: { id: req.user.id }
     });
+
     res.status(200).json({ nickname: req.body.nickname });
   } catch (error) {
     console.error(error);
@@ -217,13 +205,15 @@ router.get('/followers', isLoggedIn, async (req, res, next) => {
     const user = await User.findOne({
       where: { id: req.user.id },
     });
+
     if (!user) {
       res.status(403).send('해당 유저가 존재하지 않습니다.');
     }
-    // findAll 사용하지 않은 이유, Followers가 어떤 type으로 반환되는지 생각해볼 것
+
     const Followers = await user.getFollowers({
       limit: parseInt(req.query.limit, 10),
     });
+
     res.status(200).json(Followers);
   } catch (error) {
     console.error(error);
@@ -234,7 +224,6 @@ router.get('/followers', isLoggedIn, async (req, res, next) => {
 // [register profile image]
 router.post('/profile', isLoggedIn, upload.single('image'), async (req, res, next) => {
   try {
-    console.log('#####이미지' + req.file.filename, req.user.id);
     const url = 'https://react-snsbyjg-s3.s3.ap-northeast-2.amazonaws.com/original/';
     const result = await Profile.findOrCreate({
       where: {
@@ -245,7 +234,7 @@ router.post('/profile', isLoggedIn, upload.single('image'), async (req, res, nex
         UserId: req.user.id,
       }
     });
-    console.log('#####생성 여부' + result[1]);
+
     if (!result[1]) {
       await Profile.update({
         profileSrc: req.file.location,
@@ -255,10 +244,12 @@ router.post('/profile', isLoggedIn, upload.single('image'), async (req, res, nex
         }
       });
     }
+
     const profile = await Profile.findOne({
       where: { UserId: req.user.id },
       attributes: ['profileSrc'],
     });
+
     res.status(201).json(profile);
   } catch (error) {
     console.error(error);
@@ -269,7 +260,6 @@ router.post('/profile', isLoggedIn, upload.single('image'), async (req, res, nex
 // [register cover image]
 router.post('/cover', isLoggedIn, upload.single('image'), async (req, res, next) => {
   try {
-    console.log('#####이미지' + req.file.filename, req.user.id);
     const url = 'https://react-snsbyjg-s3.s3.ap-northeast-2.amazonaws.com/original/';
     const result = await Profile.findOrCreate({
       where: {
@@ -280,7 +270,7 @@ router.post('/cover', isLoggedIn, upload.single('image'), async (req, res, next)
         UserId: req.user.id,
       }
     });
-    console.log('#####생성 여부' + result[1]);
+
     if (!result[1]) {
       await Profile.update({
         coverSrc: req.file.location,
@@ -290,10 +280,12 @@ router.post('/cover', isLoggedIn, upload.single('image'), async (req, res, next)
         }
       });
     }
+
     const profile = await Profile.findOne({
       where: { UserId: req.user.id },
       attributes: ['coverSrc'],
     });
+
     res.status(201).json(profile);
   } catch (error) {
     console.error(error);
@@ -319,7 +311,7 @@ router.delete('/follower/:userId', isLoggedIn, async (req, res, next) => {
 });
 
 // [load user]
-router.get('/:userId', async (req, res, next) => { // GET /user/1
+router.get('/:userId', async (req, res, next) => {
   try {
     const userWithoutPassword = await User.findOne({
       where: { id: req.params.userId },
@@ -346,8 +338,7 @@ router.get('/:userId', async (req, res, next) => { // GET /user/1
       // 시퀄라이즈가 반환한 데이터를 조작하기 위해 json으로 변경
       const data = userWithoutPassword.toJSON();
 
-      // 개수로만 데이터를 갈아끼움 id는 없어지도록
-      data.Posts = data.Posts.length; // 개인정보 침해 예방
+      data.Posts = data.Posts.length;
       data.Followers = data.Followers.length;
       data.Followings = data.Followings.length;
       res.status(200).json(data);
@@ -366,9 +357,8 @@ router.get('/:userId/posts', async (req, res, next) => {
     const where = {
       UserId: parseInt(req.params.userId, 10),
     };
-    if (parseInt(req.query.lastId, 10)) { // 초기 로딩이 아닐 때
-      // 초기엔 &lt 로 작성하였으나 SQL Injection 문제의 가능성이 있어 수정
-      where.id = { [Op.lt]: parseInt(req.query.lastId, 10) } // lastId 보다 작은 id
+    if (parseInt(req.query.lastId, 10)) {
+      where.id = { [Op.lt]: parseInt(req.query.lastId, 10) }
     }
     const allPostsLength = await Post.count({ where });
     const completePosts = await Post.findAll({
@@ -380,7 +370,7 @@ router.get('/:userId/posts', async (req, res, next) => {
       ],
       include: [{
         model: User,
-        attributes: ['id', 'nickname', 'email'], // password 제외
+        attributes: ['id', 'nickname', 'email'],
         include: [{
           model: Profile,
           attributes: ['profileSrc'],
@@ -394,12 +384,12 @@ router.get('/:userId/posts', async (req, res, next) => {
           attributes: ['id', 'nickname', 'email'],
         }],
       }, {
-        model: User, // 좋아요 누른 사람
+        model: User,
         as: 'Likers',
         attributes: ['id', 'nickname', 'email'],
       }, {
         model: Post,
-        as: 'Retweet', // -> post.Retweet으로 담김
+        as: 'Retweet',
         include: [{
           model: User,
           attributes: ['id', 'nickname', 'email'],
@@ -412,6 +402,7 @@ router.get('/:userId/posts', async (req, res, next) => {
         }],
       }],
     });
+
     return res.status(200).json({
       completePosts,
       allPostsLength,
@@ -455,17 +446,5 @@ router.delete('/:userId/follow', isLoggedIn, async (req, res, next) => {
     next(error);
   }
 });
-
-
-
-// [upload images]
-// upload.array('image'): 이미지 여러 장, .single('image'): 이미지 한 장, .none(): 텍스트, fields?, fills? 인풋이 여러 개 일 때
-// imageFormData.append('image', file); 의 key 값과 array()의 파라미터 값이 같아야 찾을 수 있음
-// router.post('/image', isLoggedIn, upload.single('image'), (req, res, next) => {
-//   // 이미지 업로드 후에 실행
-//   console.log(req.file);
-//   // res.json(req.files.map((v) => v.filename));
-//   res.status(201).json(req.file.filename);
-// });
 
 module.exports = router;

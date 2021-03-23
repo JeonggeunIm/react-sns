@@ -12,10 +12,8 @@ const { isLoggedIn, isNotLoggedIn } = require('./middlewares');
 const router = express.Router();
 
 try {
-  // uploads 폴더 유무 확인
   fs.accessSync('uploads');
 } catch (error) {
-  // 없으면 생성, 루트 경로 기준인 듯?
   console.error(error);
   fs.mkdirSync('uploads');
 }
@@ -28,18 +26,6 @@ AWS.config.update({
 
 // multer 세팅
 const upload = multer({
-  // storage: multer.diskStorage({
-  //   destination(req, file, cb) {
-  //     // 로컬 'uploads'폴더에 저장
-  //     cb(null, 'uploads');
-  //   },
-  //   filename(req, file, cb) {
-  //     // 이름이 겹치면 노드가 이전 이미지를 덮어씌우므로 주의
-  //     const ext = path.extname(file.originalname); // 확장자 추출
-  //     const basename = path.basename(file.originalname, ext); // 파일명 추출
-  //     cb(null, basename + '_' + new Date().getTime() + ext); // => 파일명_38023932.확장자
-  //   },
-  // }),
   storage: multerS3({
     s3: new AWS.S3(),
     bucket: 'react-snsbyjg-s3',
@@ -53,7 +39,6 @@ const upload = multer({
 });
 
 // [add post]
-// POST /post
 router.post('/', isLoggedIn, upload.none(), async (req, res, next) => {
   try {
     const hashtags = req.body.content.match(/(#[^\s#]+)/g);
@@ -119,11 +104,8 @@ router.post('/', isLoggedIn, upload.none(), async (req, res, next) => {
 });
 
 // [upload images]
-// upload.array('image'): 이미지 여러 장, .single('image'): 이미지 한 장, .none(): 텍스트, fields?, fills? 인풋이 여러 개 일 때
-// imageFormData.append('image', file); 의 key 값과 array()의 파라미터 값이 같아야 찾을 수 있음
 router.post('/images', isLoggedIn, upload.array('image'), (req, res, next) => {
-  // 이미지 업로드 후에 실행
-  console.log(req.files);
+  // console.log(req.files);
   res.json(req.files.map((v) => v.location));
 });
 
@@ -190,7 +172,6 @@ router.get('/:postId', async (req, res, next) => {
 // [delete post]
 router.delete('/:postId', isLoggedIn, async (req, res, next) => {
   try {
-    // delete
     await Post.destroy({
       where: {
         id: req.params.postId,
@@ -230,7 +211,7 @@ router.patch('/:postId', isLoggedIn, upload.none(), async (req, res, next) => {
       if (Array.isArray(req.body.image)) {
         // DB에 이미지 자체를 올리는 것이 아닌 주소를 넣어줌, CDN 캐싱도 불가하므로...
         const images = await Promise.all(req.body.image.map((image) => Image.create({ src: image })));
-        await post.setImages(images); // Images 테이블에서 images에 해당하는 PostId에 post의 id를 넣는 건가..??
+        await post.setImages(images);
       } else { // 이미지가 하나인 경우
         const image = await Image.create({ src: req.body.image });
         await post.setImages(image);
@@ -254,7 +235,6 @@ router.patch('/:postId', isLoggedIn, upload.none(), async (req, res, next) => {
 });
 
 // [add comment]
-// :postId 부분은 동적 변화 처리
 router.post('/:postId/comment', isLoggedIn, async (req, res, next) => {
   try {
     // 존재하지 않는 게시글에 comment 요청 방지
@@ -266,12 +246,9 @@ router.post('/:postId/comment', isLoggedIn, async (req, res, next) => {
       return res.status(403).send('존재하지 않는 게시글입니다.');
     }
 
-    // { content: commentText, postId: post.id, userId: id },
     const comment = await Comment.create({
       content: req.body.content,
-      // :postId를 접근
       PostId: parseInt(req.params.postId, 10),
-      // passport/index.js의 passport.deserializeUser에서 cb(null, user); -> req.user로 받아 옴
       UserId: req.user.id,
     });
 
@@ -296,7 +273,6 @@ router.post('/:postId/comment', isLoggedIn, async (req, res, next) => {
 
 // [like post]
 router.patch('/:postId/like', isLoggedIn, async (req, res, next) => {
-  // 게시글의 내부 작업을 할 땐 항상 그 게시물이 있는지 부터 확인할 것
   try {
     const post = await Post.findOne({
       where: { id: req.params.postId },
@@ -305,7 +281,6 @@ router.patch('/:postId/like', isLoggedIn, async (req, res, next) => {
     if (!post) {
       res.status(403).send('게시글이 존재하지 않습니다.');
     }
-    // 관계 메서드 -> mysql2 이용하여 sql문 전달할 수도 있음
     await post.addLikers(req.user.id);
     res.status(201).json({
       PostId: post.id,
@@ -375,14 +350,13 @@ router.post('/:postId/retweet', isLoggedIn, async (req, res, next) => {
       content: 'Retweeted Post',
     });
 
-    // 복잡해지면 DB에서 가져오는게 늦어짐 -> 라우터 분리 -> ex. 게시글 먼저 불러오고 댓글을 창 열면 가져오기
     const retweetWithPrevPost = await Post.findOne({
       where: {
         id: retweet.id,
       },
       include: [{
         model: Post,
-        as: 'Retweet', // -> post.Retweet으로 담김
+        as: 'Retweet',
         include: [{
           model: User,
           attributes: ['id', 'nickname', 'email'],
@@ -421,5 +395,4 @@ router.post('/:postId/retweet', isLoggedIn, async (req, res, next) => {
   }
 });
 
-// export default 와 동일
 module.exports = router;
