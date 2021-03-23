@@ -19,7 +19,7 @@ const PostCardContent = ({ post, commentOpened }) => {
           content.split(/(#[^\s#]+)/g).map((v, i) => {
             if (v.match(/(#[^\s#]+)/g)) {
               return (
-                <Link href={`/hashtag/${v.slice(1)}`} key={i}>
+                <Link href={`/hashtag/${v.slice(1)}`} key={i} prefetch={false}>
                   <a className="hashtag" onClick={onPreventClick} role="link" alt={`${v}태그 검색하기`}>{v}</a>
                 </Link>
               );

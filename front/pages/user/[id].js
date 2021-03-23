@@ -72,8 +72,8 @@ const User = () => {
           <meta name="description" content={`${userInfo.nickname}님의 게시글`} />
           <meta property="og:title" content={`${userInfo.nickname}님의 게시글`} />
           <meta property="og:description" content={`${userInfo.nickname}님의 게시글`} />
-          <meta property="og:image" content="https://nodebird.com/favicon.ico" />
-          <meta property="og:url" content={`https://nodebird.com/user/${id}`} />
+          <meta property="og:image" content="https://snsbyjg.website/favicon.ico" />
+          <meta property="og:url" content={`https://snsbyjg.website/user/${id}`} />
         </Head>
       )}
       {userInfo

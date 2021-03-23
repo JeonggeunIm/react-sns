@@ -11,7 +11,7 @@ const FormHeader = ({ title }) => (
     <Row>
       <Col xs={24} md={16}>
         <h1>{title}</h1>
-        <Link href="/">
+        <Link href="/" prefetch={false}>
           <a title="뒤로 가기"><CloseOutlined weight="300" /></a>
         </Link>
       </Col>

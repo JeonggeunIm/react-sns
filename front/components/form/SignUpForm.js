@@ -197,7 +197,7 @@ const SignUpForm = ({ isSigningUp }) => {
             wrapperCol={tailFormItemLayout.wrapperCol}
           >
             <Checkbox>
-              <Link href="#"><a>개인정보처리방침</a></Link>에 동의합니다.
+              <Link href="#" prefetch={false}><a>개인정보처리방침</a></Link>에 동의합니다.
             </Checkbox>
           </Form.Item>
           <Form.Item wrapperCol={tailFormItemLayout.wrapperCol}>

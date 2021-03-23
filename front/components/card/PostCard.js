@@ -214,7 +214,7 @@ const PostCard = ({
               <>
                 <Card.Meta
                   title={(
-                    <Link href={`/user/${post.Retweet.User.id}`}>
+                    <Link href={`/user/${post.Retweet.User.id}`} prefetch={false}>
                       <a onClick={onPreventClick}>{post.Retweet.User.nickname}</a>
                     </Link>
                   )}
@@ -225,7 +225,7 @@ const PostCard = ({
                     </>
                   )}
                   avatar={(
-                    <Link href={`/user/${post.Retweet.User.id}`}>
+                    <Link href={`/user/${post.Retweet.User.id}`} prefetch={false}>
                       <a onClick={onPreventClick}>
                         <Avatar
                           size={40}
@@ -245,7 +245,7 @@ const PostCard = ({
               <>
                 <Card.Meta
                   title={(
-                    <Link href={`/user/${post.User.id}`}>
+                    <Link href={`/user/${post.User.id}`} prefetch={false}>
                       <a onClick={onPreventClick}>{post.User.nickname}</a>
                     </Link>
                   )}
@@ -256,7 +256,7 @@ const PostCard = ({
                     </>
                   )}
                   avatar={(
-                    <Link href={`/user/${post.User.id}`}>
+                    <Link href={`/user/${post.User.id}`} prefetch={false}>
                       <a onClick={onPreventClick}>
                         <Avatar
                           size={40}

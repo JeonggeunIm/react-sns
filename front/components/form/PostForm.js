@@ -43,7 +43,7 @@ const PostForm = ({ handlePostCancel, popup = false, post, postVisible, main = f
     imagePaths.forEach((path) => formData.append('image', path)); // -> req.body.image
     formData.append('content', text); // -> req.body.content
 
-    router.push(`/user/${myInfo.id}`);
+    router.push(`/user/${myInfo.id}`).then((() => window.scrollTo(0, 0)));;
 
     dispatch({
       type: ADD_POST_REQUEST,

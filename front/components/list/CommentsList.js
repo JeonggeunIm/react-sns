@@ -24,7 +24,7 @@ const CommentsList = ({ orderedComments }) => (
           )}
           content={item.content}
           avatar={(
-            <Link href={`/user/${item.User.id}`}>
+            <Link href={`/user/${item.User.id}`} prefetch={false}>
               <a>
                 <Avatar
                   size={48}

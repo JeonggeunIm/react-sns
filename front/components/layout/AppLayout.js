@@ -39,7 +39,7 @@ const AppLayout = ({ children }) => {
       return alert('검색할 태그명을 입력해주세요.');
     }
 
-    Router.push(`/hashtag/${searchInput}`);
+    router.push(`/hashtag/${searchInput}`).then((() => window.scrollTo(0, 0)));;
   }, [searchInput]);
 
   const showPostModal = useCallback((e) => {
@@ -68,15 +68,15 @@ const AppLayout = ({ children }) => {
         <Col xs={24} md={10} xl={10}>
           <Menu mode="vertical">
             <Menu.Item key="logo">
-              <Link href="/home">
+              <Link href="/home" prefetch={false}>
                 <a><MessageOutlined /><span className="ir_so">SNS 로고</span></a>
               </Link>
             </Menu.Item>
             <Menu.Item key="home" icon={<HomeOutlined />}>
-              <Link href="/home"><a>홈</a></Link>
+              <Link href="/home" prefetch={false}><a>홈</a></Link>
             </Menu.Item>
             <Menu.Item key="profile" icon={<UserOutlined />}>
-              <Link href={`/user/${myInfo?.id}`}><a>프로필</a></Link>
+              <Link href={`/user/${myInfo?.id}`} prefetch={false}><a>프로필</a></Link>
             </Menu.Item>
             <Menu.Item key="search">
               <Input.Search

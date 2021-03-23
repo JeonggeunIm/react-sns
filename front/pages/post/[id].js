@@ -24,7 +24,6 @@ const Post = () => {
     }
   }, [isLoggedOut, isLoggedIn, myInfo]);
 
-
   useEffect(() => {
     if (retweetPostDone) {
       return router.push(`/user/${myInfo?.id}`).then((() => window.scrollTo(0, 0)));
@@ -43,8 +42,8 @@ const Post = () => {
         {/* SNS 공유 시 제공되는 정보, 미리보기 등 */}
         <meta property="og:title" content={`${targetPost.User.nickname}님의 게시글`} />
         <meta property="og:description" content={targetPost.content} />
-        <meta property="og:image" content={targetPost.Images[0] ? targetPost.Images[0].src : 'https://nodebird.com/favicon.ico'} />
-        <meta property="og:url" content={`https://nodebird.com/post/${id}`} />
+        <meta property="og:image" content={targetPost.Images[0] ? targetPost.Images[0].src : 'https://snsbyjg.website/favicon.ico'} />
+        <meta property="og:url" content={`https://snsbyjg.website/post/${id}`} />
       </Head>
       <AppHeader title="포스트" targetPost={targetPost} />
       <PostCard

@@ -209,8 +209,10 @@ export const AppLayoutWrapper = styled.div`
       & > .ant-col:nth-child(2) {
         width: 100%;
         min-width: 100%;
-        padding-bottom: 60px;
+        max-height: 100vh;
         margin-left: 0;
+        padding-bottom: 60px;
+        box-sizing: border-box;
         overflow: hidden;
       }
       .ant-menu {

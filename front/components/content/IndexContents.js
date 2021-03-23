@@ -21,14 +21,14 @@ const IndexContents = () => (
       </Row>
       <Row>
         <Col xs={24} md={12}>
-          <Link href="/signup">
+          <Link href="/signup" prefetch={false}>
             <a><Button type="primary" shape="round">가입하기</Button></a>
           </Link>
         </Col>
       </Row>
       <Row>
         <Col xs={24} md={12}>
-          <Link href="/login">
+          <Link href="/login" prefetch={false}>
             <a><Button shape="round">로그인</Button></a>
           </Link>
         </Col>
