@@ -68,7 +68,7 @@ const UserProfile = () => {
               <Card.Meta
                 avatar={(
                   <Avatar
-                    size={{ sm: 32, md: 48, lg: 48, xl: 48, xxl: 48 }}
+                    size={{ xs: 42, sm: 42, md: 48, lg: 48, xl: 48, xxl: 48 }}
                     {...(profileSrc ? { src: profileSrc } : { icon: <UserOutlined /> })}
                   />
                 )}

@@ -100,6 +100,9 @@ const Global = createGlobalStyle`
     .ant-popover-placement-topRight > .ant-popover-content > .ant-popover-arrow {
       right: 50%;
     }
+    .ant-popover-placement-top > .ant-popover-content > .ant-popover-arrow {
+      display: none !important;
+    }
   }
 `;
 

@@ -201,9 +201,9 @@ const postReducer = (state = initialState, action) => (
         break;
       }
       case ADD_POST_SUCCESS: {
-        draft.mainPosts.unshift(action.data);
         draft.addPostDone = true;
         draft.addPostLoading = false;
+        action.data.isOwn && draft.mainPosts.unshift(action.data);
         break;
       }
       case ADD_POST_FAILURE: {
@@ -285,7 +285,7 @@ const postReducer = (state = initialState, action) => (
         break;
       }
       case UPLOAD_IMAGES_SUCCESS: {
-        draft.imagePaths = action.data;
+        draft.imagePaths = draft.imagePaths.concat(action.data);
         draft.uploadImagesDone = true;
         draft.uploadImagesLoading = false;
         break;

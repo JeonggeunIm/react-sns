@@ -29,7 +29,7 @@ const User = () => {
     loadPostDone,
     addCommentDone,
   } = useSelector((state) => state.postReducer);
-
+  console.log(router.asPath);
   useEffect(() => {
     function onScroll() {
       if (window.scrollY + document.documentElement.clientHeight > document.documentElement.scrollHeight - 400) {

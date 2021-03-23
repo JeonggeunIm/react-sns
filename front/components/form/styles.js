@@ -126,12 +126,12 @@ export const PostFormWrapper = styled.div`
       .ant-row:nth-child(3) {
         position: absolute;
         width: 5%;
-        right: calc(18% + 3px);
+        right: calc(28% + 3px);
         bottom: 8px;
       }
       .ant-row:nth-child(4) {
-        width: 20%;
-        margin-left: 80%;
+        width: 28%;
+        margin-left: 70%;
       }
     }
   }
@@ -168,7 +168,7 @@ export const PostFormWrapper = styled.div`
       }
       .ant-form {
         .ant-row:nth-child(3) {
-          right: calc(18% + 6px);
+          right: calc(28% + 6px);
         }
       }
     }

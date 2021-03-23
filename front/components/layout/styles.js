@@ -83,6 +83,18 @@ export const AppLayoutWrapper = styled.div`
       text-align: left;
       line-height: 50px;
 
+      &:nth-child(2) {
+        color: ${({ isHome }) => isHome && '#1890ff'};
+        a {
+          color: ${({ isHome }) => isHome && '#1890ff'}
+        }
+      }
+      &:nth-child(3) {
+        color: ${({ isProfile }) => isProfile && '#1890ff'};
+        a {
+          color: ${({ isProfile }) => isProfile && '#1890ff'};
+        }
+      }
       &:last-child {
         height: 54px;
         margin-top: 60px;
@@ -245,7 +257,7 @@ export const AppLayoutWrapper = styled.div`
           .ant-card {
             width: 42px;
             height: 42px;
-            margin: 9px 8px;
+            margin: 9px 5px;
             border-radius: 50%;
           }
           .ant-card .ant-card-body {
@@ -255,11 +267,10 @@ export const AppLayoutWrapper = styled.div`
             display: none;
           }
           .ant-card .ant-card-meta-avatar {
-            padding: 0 4px;
-            line-height: 45px;
+            padding: 0;
           }
           .anticon-user {
-            font-size: 16px;
+            font-size: 18px;
           }
         }
         &:last-child {
@@ -324,5 +335,5 @@ export const IndexContentsWrapper = styled.div`
 
 export const IndexBackGround = styled.div`
   height: 100%;
-  background: url('images/bg_index.jpg') no-repeat center / cover;
+  background: url('http://snsbyjg.website/images/bg_index.jpg') no-repeat center / cover;
 `;

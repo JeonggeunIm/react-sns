@@ -230,4 +230,12 @@ export const ProfileCardWrapper = styled(Card)`
 `;
 
 export const UserProfileWrapper = styled.div`
+  @media screen and (max-width: 767px) {
+    .ant-card-bordered {
+      border: none;
+    }
+    .ant-card-meta {
+      margin: 0;
+    }
+  }
 `;

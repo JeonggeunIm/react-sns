@@ -1,8 +1,8 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { PropTypes } from 'prop-types';
 import Link from 'next/link';
-import Router from 'next/router';
+import Router, { useRouter } from 'next/router';
 import { Menu, Input, Row, Col, Button, Modal } from 'antd';
 import { HomeOutlined, UserOutlined, MessageOutlined, SearchOutlined, SendOutlined } from '@ant-design/icons';
 
@@ -14,11 +14,26 @@ import { UPDATE_IMAGES, SHOW_IMAGES_PREVIEW } from '../../reducers/post';
 
 const AppLayout = ({ children }) => {
   const dispatch = useDispatch();
+  const router = useRouter();
   const { myInfo } = useSelector((state) => state.user);
 
   const [searchInput, onChangeSearchInput] = useInput('');
   const [postVisible, setPostVisible] = useState(false);
-
+  const [isHome, setIsHome] = useState(false);
+  const [isProfile, setIsProfile] = useState(false);
+  useEffect(() => {
+    if (router.asPath === '/home') {
+      setIsHome(true);
+      setIsProfile(false);
+    } else {
+      setIsHome(false);
+      if (router.asPath === `/user/${myInfo.id}`) {
+        setIsProfile(true);
+      } else {
+        setIsProfile(false);
+      }
+    }
+  });
   const onSearch = useCallback(() => {
     if (!searchInput || !searchInput.trim()) {
       return alert('검색할 태그명을 입력해주세요.');
@@ -48,7 +63,7 @@ const AppLayout = ({ children }) => {
   }, []);
 
   return (
-    <AppLayoutWrapper postVisible={postVisible}>
+    <AppLayoutWrapper postVisible={postVisible} isHome={isHome} isProfile={isProfile}>
       <Row>
         <Col xs={24} md={10} xl={10}>
           <Menu mode="vertical">

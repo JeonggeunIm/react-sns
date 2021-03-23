@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Form, Input, Button, Avatar, Row, Col } from 'antd';
 import { UserOutlined, FileImageOutlined, CloseOutlined } from '@ant-design/icons';
 import { useSelector, useDispatch } from 'react-redux';
+import { useRouter } from 'next/router';
 
 import { PostFormWrapper, ImagePreviewWrapper } from './styles';
 import useInput from '../../hooks/useInput';
@@ -18,8 +19,10 @@ import { backURL } from '../../config/config';
 const PostForm = ({ handlePostCancel, popup = false, post, postVisible, main = false }) => {
   const dispatch = useDispatch();
   const [form] = Form.useForm();
+  const router = useRouter();
   const { imagePaths, addPostDone, showImagesPreview } = useSelector((state) => state.postReducer);
   const profileSrc = useSelector((state) => state.user.myInfo?.Profile?.profileSrc);
+  const { myInfo } = useSelector((state) => state.user);
 
   const [text, onChangeText, setText] = useInput(post ? post.content : '');
   const imageInput = useRef();
@@ -40,9 +43,12 @@ const PostForm = ({ handlePostCancel, popup = false, post, postVisible, main = f
     imagePaths.forEach((path) => formData.append('image', path)); // -> req.body.image
     formData.append('content', text); // -> req.body.content
 
+    router.push(`/user/${myInfo.id}`);
+
     dispatch({
       type: ADD_POST_REQUEST,
       data: formData,
+      isOwn: router.asPath === `/user/${myInfo.id}` ? true : false,
     });
 
     return handlePostCancel();
@@ -167,7 +173,7 @@ const PostForm = ({ handlePostCancel, popup = false, post, postVisible, main = f
                 size="large"
                 htmlType="submit"
               >
-                {post ? '수정하기' : '포스트'}
+                {post ? '수정하기' : '포스트하기'}
               </Button>
             </Form.Item>
           </Form>
