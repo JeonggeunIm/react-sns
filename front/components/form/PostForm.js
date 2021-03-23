@@ -51,7 +51,6 @@ const PostForm = ({ handlePostCancel, popup = false, post, postVisible, main = f
       isOwn: router.asPath === `/user/${myInfo.id}` ? true : false,
     });
 
-    return handlePostCancel();
   }, [dispatch, text, imagePaths]);
 
   const onEditPost = useCallback(() => {
