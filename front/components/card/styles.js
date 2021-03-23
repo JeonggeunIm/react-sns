@@ -26,7 +26,6 @@ export const PostCardWrapper = styled.div`
     padding: 0 0 10px;
   }
   .ant-card-actions {
-    margin-left: 56px;
     border-top: none;
     background-color: transparent;
     z-index: 100;
@@ -47,7 +46,7 @@ export const PostCardWrapper = styled.div`
       }
     }
     .anticon {
-      text-align: left;
+      text-align: center;
       font-size: 20px;
       line-height: 18px;
     }

@@ -12,6 +12,8 @@ const Global = createGlobalStyle`
       width: 100%;
       height: 40px;
       padding: 6px 0;
+      box-sizing: border-box;
+      line-height: 40px;
 
       button {
         position: absolute;

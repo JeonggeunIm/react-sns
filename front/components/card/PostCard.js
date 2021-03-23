@@ -193,7 +193,7 @@ const PostCard = ({
                 : (
                   <FollowButton
                     userInfo={
-                      post.RetweetId && post.Retweet
+                      post.RetweetId && post.Retweet && (post.Retweet.User.id !== id)
                         ? post.Retweet.User
                         : post.User
                     }

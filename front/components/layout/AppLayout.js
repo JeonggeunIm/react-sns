@@ -27,7 +27,7 @@ const AppLayout = ({ children }) => {
       setIsProfile(false);
     } else {
       setIsHome(false);
-      if (router.asPath === `/user/${myInfo.id}`) {
+      if (router.asPath === `/user/${myInfo?.id}`) {
         setIsProfile(true);
       } else {
         setIsProfile(false);
