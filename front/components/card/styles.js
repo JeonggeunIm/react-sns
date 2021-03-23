@@ -129,6 +129,9 @@ export const PostCardWrapper = styled.div`
     .ant-list-split .ant-list-item {
       padding: 4px 14px;
     }
+    .ant-card-actions {
+      margin-left: 28px;
+    }
   }
 `;
 

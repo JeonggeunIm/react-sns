@@ -3,6 +3,9 @@ import { createGlobalStyle } from 'styled-components';
 const Global = createGlobalStyle`
   .ir_so {overflow: hidden; position: absolute; width: 0; height: 0; line-height: 0; text-indent: -9999px;}
 
+  .ant-popover {
+    z-index: 0;
+  }
   .ant-popover-inner-content {
     width: 180px;
     padding: 0;
@@ -19,7 +22,10 @@ const Global = createGlobalStyle`
         position: absolute;
         width: 100%;
         height: 100%;
-        inset: 0;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
         border: none;
         outline: none;
         color: inherit;
