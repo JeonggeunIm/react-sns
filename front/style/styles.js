@@ -54,6 +54,7 @@ const Global = createGlobalStyle`
       border-radius: 15px;
 
       &-content {
+        width: 100%;
         min-width: 177px;
         padding: 0;
       }
@@ -101,9 +102,6 @@ const Global = createGlobalStyle`
     .ant-popover-placement-top {
       width: 100%;
       margin: 0 20px;
-    }
-    .ant-popover-placement-top .ant-popover-inner-content {
-      width: 100%;
     }
     .ant-popover-placement-topRight > .ant-popover-content > .ant-popover-arrow {
       right: 50%;
