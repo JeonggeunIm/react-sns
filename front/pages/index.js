@@ -9,7 +9,7 @@ import wrapper from '../store/configureStore';
 import IndexLayout from '../components/layout/IndexLayout';
 import LoginForm from '../components/form/LoginForm';
 import IndexContents from '../components/content/IndexContents';
-import { LOAD_MY_INFO_REQUEST, LOG_IN_REQUEST } from '../reducers/user';
+import { LOAD_MY_INFO_REQUEST } from '../reducers/user';
 
 const Index = () => {
   const router = useRouter();
@@ -49,6 +49,9 @@ export const getServerSideProps = wrapper.getServerSideProps(async (context) => 
     axios.defaults.headers.Cookie = cookie;
   }
 
+  context.store.dispatch({
+    type: LOAD_MY_INFO_REQUEST,
+  });
   context.store.dispatch(END);
   await context.store.sagaTask.toPromise();
 });

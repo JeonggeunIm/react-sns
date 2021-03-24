@@ -1,16 +1,17 @@
 import React, { useEffect } from 'react';
 import axios from 'axios';
 import { END } from 'redux-saga';
-import Router from 'next/router';
+import Router, { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 
 import wrapper from '../store/configureStore';
 import IndexLayout from '../components/layout/IndexLayout';
 import SignUpForm from '../components/form/SignUpForm';
-import { LOAD_MY_INFO_REQUEST, LOG_IN_REQUEST } from '../reducers/user';
+import { LOAD_MY_INFO_REQUEST } from '../reducers/user';
 
 const Signup = () => {
-  const { isSigningUp, isSignedUp, signUpErr, isLoggedIn } = useSelector((state) => state.user);
+  const router = useRouter();
+  const { myInfo, isSigningUp, isSignedUp, signUpErr, isLoggedIn } = useSelector((state) => state.user);
 
   useEffect(() => {
     if (isSignedUp) {
@@ -30,6 +31,12 @@ const Signup = () => {
     }
   }, [isLoggedIn]);
 
+  useEffect(() => {
+    if (myInfo) {
+      router.push('/home').then((() => window.scrollTo(0, 0)));
+    }
+  }, [myInfo]);
+
   return (
     <IndexLayout>
       <SignUpForm isSigningUp={isSigningUp} />
@@ -44,9 +51,7 @@ export const getServerSideProps = wrapper.getServerSideProps(async (context) => 
   if (context.req && cookie) {
     axios.defaults.headers.Cookie = cookie;
   }
-  context.store.dispatch({
-    type: LOG_IN_REQUEST,
-  });
+
   context.store.dispatch({
     type: LOAD_MY_INFO_REQUEST,
   });
