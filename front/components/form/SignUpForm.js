@@ -56,7 +56,7 @@ const SignUpForm = ({ isSigningUp }) => {
       data: { email, password, nickname },
     });
 
-    console.log(email, nickname, password);
+    // console.log(email, nickname, password);
   }, [
     email,
     password,

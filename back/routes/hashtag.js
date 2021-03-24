@@ -10,7 +10,7 @@ router.get('/:hashtag', async (req, res, next) => {
     if (parseInt(req.query.lastId, 10)) { // 초기 로딩이 아닐 때
       where.id = { [Op.lt]: parseInt(req.query.lastId, 10) } // lastId 보다 작은 id
     }
-    console.log(req.params.hashtag);
+    // console.log(req.params.hashtag);
     const completePosts = await Post.findAll({
       where,
       limit: 10,

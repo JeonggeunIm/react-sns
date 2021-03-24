@@ -25,7 +25,7 @@ router.get('/', async (req, res, next) => {
       where.id = { [Op.lt]: parseInt(req.query.lastId, 10) } // lastId 보다 작은 id
     }
     const allPostsLength = await Post.count();
-    console.log(allPostsLength);
+    // console.log(allPostsLength);
     const completePosts = await Post.findAll({
       where,
       limit: 10,

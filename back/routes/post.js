@@ -222,7 +222,7 @@ router.patch('/:postId', isLoggedIn, upload.none(), async (req, res, next) => {
     const completeImages = await Image.findAll({
       where: { PostId: post.id },
     });
-    console.log(completeImages);
+    // console.log(completeImages);
     res.status(200).json({
       PostId: parseInt(req.params.postId, 10),
       content: req.body.content,

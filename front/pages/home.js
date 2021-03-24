@@ -28,7 +28,7 @@ const Home = () => {
     addCommentDone,
   } = useSelector((state) => state.postReducer);
 
-  console.log(myInfo);
+  // console.log(myInfo);
   useEffect(() => {
     if (targetPost && loadPostDone) {
       if (allPostsCount !== 0 || addCommentDone) {

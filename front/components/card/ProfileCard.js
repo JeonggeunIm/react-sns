@@ -13,7 +13,7 @@ import { ProfileCardWrapper } from './styles';
 moment.locale('ko');
 
 const ProfileCard = ({ userInfo }) => {
-  console.log(userInfo);
+  // console.log(userInfo);
   const id = useSelector((state) => state.user.myInfo?.id);
   const profileSrc = useSelector((state) => state.user.userInfo?.Profile?.profileSrc);
   const coverSrc = useSelector((state) => state.user.userInfo.Profile?.coverSrc);

@@ -42,7 +42,7 @@ function* loadUser(action) {
   try {
     const result = yield call(loadUserAPI, action.data);
 
-    console.log(result);
+    // console.log(result);
     yield put({
       type: LOAD_USER_SUCCESS,
       data: result.data,
