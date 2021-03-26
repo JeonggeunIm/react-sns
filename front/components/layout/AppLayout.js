@@ -39,7 +39,7 @@ const AppLayout = ({ children }) => {
       return alert('검색할 태그명을 입력해주세요.');
     }
 
-    router.push(`/hashtag/${searchInput}`).then((() => window.scrollTo(0, 0)));
+    router.push(`/hashtag/${encodeURIComponent(searchInput)}`).then((() => window.scrollTo(0, 0)));
   }, [searchInput]);
 
   const showPostModal = useCallback((e) => {

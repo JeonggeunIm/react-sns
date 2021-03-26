@@ -32,14 +32,12 @@ export const PostCardWrapper = styled.div`
 
     li {
       border-right: none;
-      &:nth-child(1) .anticon::after {
+      &:nth-child(1) .anticon::after,
+      &:nth-child(2) .anticon::after {
         content: attr(data-length);
       }
       &:nth-child(2) .anticon:not([data-length=""]){
         color: ${({ liked }) => (liked ? '#eb2f96' : 'inherit')};
-      }
-      &:nth-child(2) .anticon::after {
-        content: attr(data-length);
       }
       &:nth-child(3) .anticon::after {
         content: '';

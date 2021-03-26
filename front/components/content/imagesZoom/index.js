@@ -6,14 +6,15 @@ import { LeftOutlined, RightOutlined } from '@ant-design/icons';
 import { Overlay, Header, SlickWrapper, CloseBtn, ImageWrapper, Indicator, Global } from './styles';
 
 const ImagesZoom = ({ images, onClose, defaultPageNum }) => {
-  const [currentSlide, setCurrenSlide] = useState(defaultPageNum);
+  const [currentSlide, setCurrentSlide] = useState(defaultPageNum);
   const settings = {
     initialSlide: defaultPageNum,
     infinite: true,
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
-    afterChange: (current) => setCurrenSlide(current),
+    afterChange: (current) => setCurrentSlide(current),
+    beforeChange: (slide, newSlide) => setCurrentSlide(newSlide),
     prevArrow: <LeftOutlined />,
     nextArrow: <RightOutlined />,
   };

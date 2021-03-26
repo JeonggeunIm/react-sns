@@ -94,7 +94,7 @@ const Home = () => {
 export const getServerSideProps = wrapper.getServerSideProps(async (context) => {
   const cookie = context.req ? context.req.headers.cookie : '';
 
-  //* 서버를 통해서 요청할 때 쿠키가 필요한 경우에만 default 설정해주고 다른 경우엔 비워줄 것
+  // SSR 시 쿠키 공유
   axios.defaults.headers.Cookie = '';
   if (context.req && cookie) {
     axios.defaults.headers.Cookie = cookie;
